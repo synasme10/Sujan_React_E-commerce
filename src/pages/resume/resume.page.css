@@ -1,0 +1,105 @@
+body
+{
+    margin: 0px 0px;
+    backgroundColor: #fff8f2;
+    font-family:   "Helvetica",  Sans-serif;
+ 
+}
+
+h3
+{
+    padding:5px 5px;
+    margin-right:50px;
+    margin-left:50px;
+    color: #586a6a;
+    background-color: #f3ede8;
+    text-align: center;
+}
+
+h2
+{
+    text-align: center;
+}
+
+.personel-detail
+{
+    padding: 5px 0px;
+    background-color: #d9ae89 ;
+    text-align: center;
+    color: #ffffff;
+}
+
+.detail
+{
+    margin-right: 40px;
+}
+
+
+
+
+
+.mycontainer {
+   
+    width:100%;
+    overflow:auto;
+  }
+
+.education
+{ 
+   
+    margin-left:80px;
+    width:60%;  
+    float:left;
+}
+
+.duration
+{
+   
+    text-align: right;
+    width: 20%;  
+    float:left;
+}
+
+.interest li{
+    margin-top: 5px;
+}
+
+.hobby
+{
+    margin-left:50px;
+}
+
+
+
+.skill-detail
+{
+    width: 60%;
+    margin-left:80px;
+}
+
+.projects
+{   
+    width: 80%;
+    margin-left:80px;
+}
+
+.projects li
+{
+margin-top: 5px;
+}
+
+.course
+{
+    font-weight: bold;
+}
+
+
+.fontbold
+{
+    font-weight: bold;
+}
+
+.institutename
+{   
+    font-style: italic;
+}
