@@ -25,69 +25,7 @@ const LoginPage=()=>{
         resolver:yupResolver(schema)
         });
 
-    // const [data,setdata]=useState();
-    // const [err,setErr]=useState();
-
-    //validation first learn
-    // const handlechange= (e)=>{
-
-    //     const {name, value}=e.target;
-       
-
-    //     //data={email="", password:""}
-    //     setdata({
-    //         ...data,  //... is spread operator email="", password=""
-    //         [name]:value
-    //     })
-    // }
-
-    // const validateData=(data)=>{
-    //     if(!data.email){
-    //         setErr({
-    //             ...err,
-    //             email:"email is required"
-    //         })
-    //     }
-    //     else if(!(/\S+@\S\.\S+/.test(data.email))){
-    //         setErr({
-    //             ...err,
-    //             email:null
-    //         })
-
-    //     }
-
-    //     if (!data.password){
-    //         setErr({
-    //             ...errr,
-    //             password:"password is required"
-    //         })
-    //     }else if(data.password.length<8){
-    //         setErr({
-    //             ...err,
-    //             password:null
-    //         })
-    //     }
-
-    //     // /\S+@\S\.\S+/
-    // }
-
-
-
-    // var p = document.getElementById('newPassword').value,
-    //     errors = [];
-    // if (p.length < 8) {
-    //     errors.push("Your password must be at least 8 characters"); 
-    // }
-    // if (p.search(/[a-z]/i) < 0) {
-    //     errors.push("Your password must contain at least one letter.");
-    // }
-    // if (p.search(/[0-9]/) < 0) {
-    //     errors.push("Your password must contain at least one digit."); 
-    // }
-    // if (errors.length > 0) {
-    //     alert(errors.join("\n"));
-    //     return false;
-    // }
+  
 
 
     const submitForm = async(data) => {
@@ -201,3 +139,71 @@ const LoginPage=()=>{
 
 
 export default LoginPage;
+
+
+
+
+
+  // const [data,setdata]=useState();
+    // const [err,setErr]=useState();
+
+    //validation first learn
+    // const handlechange= (e)=>{
+
+    //     const {name, value}=e.target;
+       
+
+    //     //data={email="", password:""}
+    //     setdata({
+    //         ...data,  //... is spread operator email="", password=""
+    //         [name]:value
+    //     })
+    // }
+
+    // const validateData=(data)=>{
+    //     if(!data.email){
+    //         setErr({
+    //             ...err,
+    //             email:"email is required"
+    //         })
+    //     }
+    //     else if(!(/\S+@\S\.\S+/.test(data.email))){
+    //         setErr({
+    //             ...err,
+    //             email:null
+    //         })
+
+    //     }
+
+    //     if (!data.password){
+    //         setErr({
+    //             ...errr,
+    //             password:"password is required"
+    //         })
+    //     }else if(data.password.length<8){
+    //         setErr({
+    //             ...err,
+    //             password:null
+    //         })
+    //     }
+
+    //     // /\S+@\S\.\S+/
+    // }
+
+
+
+    // var p = document.getElementById('newPassword').value,
+    //     errors = [];
+    // if (p.length < 8) {
+    //     errors.push("Your password must be at least 8 characters"); 
+    // }
+    // if (p.search(/[a-z]/i) < 0) {
+    //     errors.push("Your password must contain at least one letter.");
+    // }
+    // if (p.search(/[0-9]/) < 0) {
+    //     errors.push("Your password must contain at least one digit."); 
+    // }
+    // if (errors.length > 0) {
+    //     alert(errors.join("\n"));
+    //     return false;
+    // }

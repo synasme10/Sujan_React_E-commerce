@@ -5,8 +5,8 @@ class AuthService extends HttpService{
     login=async(data)=>{
         try{
             const loginResponse=await this.postRequest(
-                // '/v1/auth/login',
                 '/auth/login',
+                // '/v1/auth/login',
                 data
             )
             return loginResponse
