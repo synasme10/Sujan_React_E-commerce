@@ -13,13 +13,14 @@ const axiosInstance=axios.create({
 })
 
 //request
+//interceptor le control garxa response ra request
 axiosInstance.interceptors.response.use(
    (response)=>{
     //http_status_code===>2x
     return response.data
    },
    (exception)=>{
-    //except ===>2x
+       //except ===>2x
     //console.log(exception.response.status)
     //===datatype match gareko  string cha arko number cha bhayo bhane match bhayena 
     //==value compare string bhayepani number cha bhane autai bhayo bhane match hunxa
@@ -28,7 +29,7 @@ axiosInstance.interceptors.response.use(
     if(exception.response.status === 401) {
         //api call login you are logged in
         // login gara
-        //TODO: cleanup
+        //TODO: cleanup if loop ma chalyo bhane
         console.log("i am the generator")
         document.location.href="/login"
     }
@@ -42,7 +43,7 @@ axiosInstance.interceptors.response.use(
         toast.error("You do not have permission")
     }
     else {
-        throw exception?.response?.data
+        throw exception?.response
     }
         
         // throw exception?.response)

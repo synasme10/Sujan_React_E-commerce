@@ -45,7 +45,7 @@ const LoginPage=()=>{
             console.log(exception)
             //display toastify message
             // toast.error(exception.data.message)
-            toast.error("Error logging in...")
+            toast.error(exception.data.message)
 
         }
     }
@@ -64,7 +64,7 @@ const LoginPage=()=>{
             <Col className='bg-dark-subtle py-3' sm={12} md={{offset:3, span:8}} lg={{offset:3, span: 6}}>
             <Form onSubmit={handleSubmit(submitForm)}>
             <Form.Group className="row mb-3">
-            <Form.Label className="col-sm-3">Username: </Form.Label>
+            <Form.Label className="col-sm-3">Email: </Form.Label>
             <Col sm={9}>
             <EmailInputComponent 
             //  name={"email"}

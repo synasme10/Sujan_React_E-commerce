@@ -18,19 +18,19 @@ const RegisterPage=()=>{
     const {handleSubmit,control, setValue, formState: {errors}}=useForm();
 
 
-
+    console.log(errors)
     const submitForm = (data) => {
         // e.preventDefault()
         try{
             console.log(data) 
 
         }catch(exception){
-            console.log("Registration failed")
+            console.log("Registration failed",exception)
             toast.error(exception?.data?.message)
         }
 
     }
-
+    
     const [thumb,setThumb]=useState();
     
     //state variable create garxu

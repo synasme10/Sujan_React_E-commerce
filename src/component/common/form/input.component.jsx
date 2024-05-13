@@ -76,7 +76,7 @@ export const TextInputComponent=({control, errMsg,name })=>{
     return(<>
         <Form.Control 
         type="text"
-        placeholder="Enter Full Name"
+        placeholder={`Enter your ${name}`}
          size="sm" 
         {...usernameController.field}
         //  onChange={handlechange}
