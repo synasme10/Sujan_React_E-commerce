@@ -13,6 +13,8 @@ import BrandDetailPage from "./pages/brand/brand-detail.page";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import Error404 from "./pages/error/Error404.page";
+import ActivatePage from "./pages/auth/activate/activate.page";
 
 const Routings=()=>{
     return (
@@ -26,8 +28,10 @@ const Routings=()=>{
               {/* <Route path="chat"></Route> */}
               <Route path="login" element={<LoginPage/>}></Route> 
               <Route path="register" element={<RegisterPage/>}></Route> 
+              <Route path="activate/:token" element={<ActivatePage/>}></Route>
               <Route path="brand/:slug" element={<BrandDetailPage/>}></Route>
-              <Route path="about-us" element={<AboutusComponent/>}></Route>              
+              <Route path="about-us" element={<AboutusComponent/>}></Route>          
+              <Route path="*" element={<Error404 goBackUrl={"/"} name={"Home Page"}/>}/>
             </Route>
 
             <Route path="/admin" element={<Adminlayout/>}>

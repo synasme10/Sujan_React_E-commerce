@@ -16,6 +16,20 @@ class AuthService extends HttpService{
         }
     }
 
+    register=async(data)=>{
+        try{
+            let registerResponse=await this.postRequest(
+                    '/v1/auth/register',
+                    data,
+                    {file:true}
+            )
+            return registerResponse;
+        }
+        catch(exception){
+            throw exception
+        }
+    }
+
 }
 
 //authservice ko object

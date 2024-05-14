@@ -2,12 +2,12 @@ import { useController } from "react-hook-form"
 import { Form } from "react-bootstrap"
 import Select from 'react-select'
 
-export const EmailInputComponent=({control, errMsg,name })=>{
-    const emailController =useController({
-      
-        name:name,
+export const EmailInputComponent = ({ control, errMsg, name }) => {
+    const emailController = useController({
+
+        name: name,
         control,
-        defaultValue:"",
+        defaultValue: "",
         // rules:{
         //     required:"Email is required",
         //     pattern:{
@@ -16,26 +16,26 @@ export const EmailInputComponent=({control, errMsg,name })=>{
         //     }
         // }
     })
-    return(<>
-        <Form.Control 
-        
-        // type='email'
-        placeholder="Enter Username"
-         size="sm" 
-        {...emailController.field}
+    return (<>
+        <Form.Control
+
+            // type='email'
+            placeholder="Enter Username"
+            size="sm"
+            {...emailController.field}
         //  onChange={handlechange}
-         />
-         <span className="text-danger">{errMsg}</span>
-         </>
+        />
+        <span className="text-danger">{errMsg}</span>
+    </>
     )
 }
 
 
-export const PasswordInputComponent=({control, errMsg,name})=>{
-    const passwordController =useController({
-        name:name,
+export const PasswordInputComponent = ({ control, errMsg, name }) => {
+    const passwordController = useController({
+        name: name,
         control,
-        defaultValue:"",
+        defaultValue: "",
         // rules:{
         //     required:"Password is required",
         //     pattern:{
@@ -44,27 +44,27 @@ export const PasswordInputComponent=({control, errMsg,name})=>{
         //     }
         // }
     })
-    return(
+    return (
         <>
-        <Form.Control
-          
-            type='password'
-            placeholder="Enter Password"
-             size="sm" 
-             {...passwordController.field}
-             //  onChange={handlechange}
-             />
-             <span className="text-danger">{errMsg}</span>
+            <Form.Control
+
+                type='password'
+                placeholder="Enter Password"
+                size="sm"
+                {...passwordController.field}
+            //  onChange={handlechange}
+            />
+            <span className="text-danger">{errMsg}</span>
         </>
     )
 
 }
 
-export const TextInputComponent=({control, errMsg,name })=>{
-    const usernameController =useController({
-        name:name,
+export const TextInputComponent = ({ control, errMsg, name }) => {
+    const usernameController = useController({
+        name: name,
         control,
-        defaultValue:"",
+        defaultValue: "",
         // rules:{
         //     required:"Username is required",
         //     pattern:{
@@ -73,60 +73,103 @@ export const TextInputComponent=({control, errMsg,name })=>{
         //     }
         // }
     })
-    return(<>
-        <Form.Control 
-        type="text"
-        placeholder={`Enter your ${name}`}
-         size="sm" 
-        {...usernameController.field}
+    return (<>
+        <Form.Control
+            type="text"
+            placeholder={`Enter your ${name}`}
+            size="sm"
+            {...usernameController.field}
         //  onChange={handlechange}
-         />
-         <span className="text-danger">{errMsg}</span>
-         </>
+        />
+        <span className="text-danger">{errMsg}</span>
+    </>
     )
 }
 
-export const TextAreaInputComponent=({control, errMsg,name })=>{
-    const addressController =useController({
-        name:name,
+export const TextAreaInputComponent = ({ control, errMsg, name }) => {
+    const textAreaController = useController({
+        name: name,
         control,
-        defaultValue:"",
-      
+        defaultValue: "",
+
     })
-    return(<>
-        <Form.Control 
-        placeholder="Enter Address"
-         size="sm" 
-         as={"textarea"}
-         rows={5}
-         style={{resize:"none"}}
-        {...addressController.field}
+    return (<>
+        <Form.Control
+            placeholder="Enter Address"
+            size="sm"
+            as={"textarea"}
+            rows={5}
+            style={{ resize: "none" }}
+            {...textAreaController.field}
         //  onChange={handlechange}
-         />
-         <span className="text-danger">{errMsg}</span>
-         </>
+        />
+        <span className="text-danger">{errMsg}</span>
+    </>
     )
 }
 
-export const SelectDropDownComponent=({control, errMsg,name,options,setValue })=>{
-    const selectController =useController({
-        name:name,
+export const SelectDropDownComponent = ({ control, errMsg, name, options, setValue }) => {
+    const selectController = useController({
+        name: name,
         control,
-        defaultValue:"",
-    
+        defaultValue: "",
+
     })
-    return(<>
-         <Select 
-             options={options}
-             isClearable
-             onChange={(selOpts)=>{
+    return (<>
+        <Select
+            options={options}
+            isClearable
+            onChange={(selOpts) => {
                 setValue(name, selOpts)
-             }}
-            
-             className="form-select-sm"
-             {...selectController.field}
-            />
-         <span className="text-danger">{errMsg}</span>
-         </>
+            }}
+
+            className="form-select-sm"
+            {...selectController.field}
+        />
+        <span className="text-danger">{errMsg}</span>
+    </>
     )
 }
+
+export const ImageUploaderComponent = ({ setError, setThumb, setValue, control, name, errMsg }) => {
+    const imageUploadCOntroller = useController({
+        name: name,
+        control,
+    })
+    return (<>
+        <Form.Control
+            type='file'
+            accept='image/*'
+            size="sm"
+            onChange={(e) => {
+                const { files } = e.target;
+                //    console.log(files);
+
+                const allowformat = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp', 'bmp'];
+                const image = files[0]
+                //size, format , image object data format ma hunxa image ko type size sab tesma hunxa
+
+                //image.ext====>["image","ext"].pop()=>"ext"
+                let fileextension = image.name.split(".").pop();
+                if (!allowformat.includes(fileextension.toLowerCase())) {
+                    setError(name, { message: "image format not supported" })
+                } else {
+                    //3*kb*bytes normally 3000000 24 chordinxau 10001000 le garxau
+                    if (image.size <= 3000000) {
+                        setThumb(image)
+                        setValue(name,image)
+
+                    } else {
+                        setError(name, { message: "Image size should be less than 3MB " })
+                    }
+                }
+
+                //     console.log(image)
+                //    setThumb(files[0])
+            }}
+        />
+         <span className='text-danger'>{errMsg}</span>
+    </>
+    )
+}
+
