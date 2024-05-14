@@ -28,7 +28,18 @@ class HttpService {
     }
 
     getRequest = async (url, config = null) => {
-
+        try {
+            this.getHeaders(config)
+            const response = await axiosInstance.get(url, {
+                headers: {
+                    ...this.#headers
+                }
+            })
+            return response;
+        }
+        catch (exception) {
+            throw exception
+        }
     }
 
     postRequest = async (url, data = null, config = null) => {

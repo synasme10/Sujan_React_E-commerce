@@ -1,15 +1,12 @@
-
 import React, { useState } from 'react'
-
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Form, Button, Image, NavLink } from "react-bootstrap"
 import * as Yup from "yup";
-
-
 import { TextAreaInputComponent, EmailInputComponent, PasswordInputComponent, TextInputComponent, SelectDropDownComponent, ImageUploaderComponent } from "../../../component/common/form/input.component";
 import { toast } from 'react-toastify';
 import authsvc from '../auth.service';
 import { useNavigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const options = [
     { value: 'customer', label: 'Customer' },
@@ -19,14 +16,20 @@ const options = [
 const RegisterPage = () => {
     const registarSchema = Yup.object({
         //key:""
-        name: "",
-        email: "",
-        address: "",
-        role: "",
-        phone: ""
+        name: Yup.string().min(2,"Name should be atlease 2 character long").max(50).required("Username is required"),
+        email: Yup.string().email().required("Email is required"),
+        address: Yup.string().min(3,"Name should be atlease 3 character long").max(150).required("Address is required"),
+        role: Yup.object({
+            label:Yup.string().matches(/^(Seller|Customer)$/,"Role should be either Customer or Seller"),
+            value:Yup.string().matches(/^(seller|customer)$/,"Role should be either Customer or Seller")
+        },"Role should be provided").required("Select Role"),// regular expression
+        phone: Yup.string().required()
+        // image:Yup.object().optional().nullable()
     })
 
-    const { handleSubmit, control, setValue,setError, formState: { errors } } = useForm();
+    const { handleSubmit, control, setValue,setError, formState: { errors } } = useForm({
+        resolver:yupResolver(registarSchema)
+    });
     const [thumb, setThumb] = useState();
     const [loading,setLoading]=useState(false);
 
@@ -55,9 +58,11 @@ const RegisterPage = () => {
             }
 
             const resolve=await authsvc.register(formattedData)
-            toast.success("Registration Successfull. Please Check Your Account")
+            toast.success("Registration Successfull. Please Check email for activation")
             console.log(data)
             navigate("/")
+            //otp base 
+            //show otp popup
 
         } catch (exception) {
             console.log("Registration failed", exception)
@@ -67,9 +72,6 @@ const RegisterPage = () => {
         }
 
     }
-
-     
-
 
     return (
         <>
@@ -111,6 +113,17 @@ const RegisterPage = () => {
                                 </Col>
                             </Form.Group>
 
+                            <Form.Group className="row mb-3">
+                                <Form.Label className="col-sm-3">Phone: </Form.Label>
+                                <Col sm={9}>
+
+                                    <TextInputComponent
+                                        name={"phone"}
+                                        control={control}
+                                        errMsg={errors?.phone?.message}
+                                    />
+                                </Col>
+                            </Form.Group>
                             {/* <Form.Group className="row mb-3">
                                 <Form.Label className="col-sm-3">Password: </Form.Label>
                                 <Col sm={9}>
@@ -186,12 +199,13 @@ const RegisterPage = () => {
                     </Col>
 
                 </Row>
-
+                <Row>
                 <Col>
                     Or
                     {/* <NavLink className={"btn btn-sm btn-link"} to={"/login"} >Login</NavLink> */}
                     <NavLink className={"btn btn-sm btn-link"} >Login</NavLink>
                 </Col>
+                </Row>
             </Container>
         </>
     )

@@ -112,7 +112,7 @@ export const SelectDropDownComponent = ({ control, errMsg, name, options, setVal
     const selectController = useController({
         name: name,
         control,
-        defaultValue: "",
+        defaultValue: null,
 
     })
     return (<>

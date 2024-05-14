@@ -30,8 +30,33 @@ class AuthService extends HttpService{
         }
     }
 
-}
+    verifyToken=async(token)=>{
+        try{
+            const response=await this.getRequest(
+                '/v1/auth/verify/'+token       
+            )
+            return response;
+           
+            
+        } catch(exception){
+            throw exception
+        }
+    }
 
+    setActivation=async(data,token)=>{
+        try{
+            const response=await this.postRequest(
+                '/v1/auth/activation/'+token,
+                data       
+            )
+            return response;
+           
+        }catch(exception){
+            throw exception
+        }
+    }
+
+}
 //authservice ko object
 const authsvc=new AuthService();
 export default authsvc;
