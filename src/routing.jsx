@@ -15,6 +15,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import Error404 from "./pages/error/Error404.page";
 import ActivatePage from "./pages/auth/activate/activate.page";
+import CheckPermission from "./config/permission.config";
 
 const Routings=()=>{
     return (
@@ -34,7 +35,7 @@ const Routings=()=>{
               <Route path="*" element={<Error404 goBackUrl={"/"} name={"Home Page"}/>}/>
             </Route>
 
-            <Route path="/admin" element={<Adminlayout/>}>
+            <Route path="/admin" element={<CheckPermission accessBy={"admin"}><Adminlayout/></CheckPermission>}>
               <Route index element={<DashboardPage/>}></Route>
             
             </Route>

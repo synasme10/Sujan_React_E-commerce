@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Container,Row,Col, Form,Button } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { EmailInputComponent, PasswordInputComponent } from "../../../component/common/form/input.component";
 import * as Yup from "yup";
@@ -11,10 +11,10 @@ import authsvc from "../auth.service";
 
 
 const LoginPage=()=>{
-
+    const navigate=useNavigate();
     const schema=Yup.object({
-        // email:Yup.string().email("Invalid email format").required("Emails is required"),
-        username:Yup.string().required("Username is required"),
+        email:Yup.string().email("Invalid email format").required("Emails is required"),
+        // username:Yup.string().required("Username is required"),
         password:Yup.string().required("Password is required")
         // password:Yup.string().matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,25}$/,{message:"password must contain one lowercase, one uppercase, a number, one special character and should be of 8-25 character long"}).required("Password is required")
     })
@@ -38,8 +38,9 @@ const LoginPage=()=>{
         try{
             const loginData=await authsvc.login(data);
             console.log(loginData)
-            toast.success("You are Welcome")
-            console.log("I am login")
+            toast.success(`Welcome to ${loginData.result.userDetail.role} Panel`)
+            // console.log("I am login")
+            navigate("/"+loginData.result.userDetail.role)
         }
         catch(exception){
             console.log(exception)
@@ -67,8 +68,8 @@ const LoginPage=()=>{
             <Form.Label className="col-sm-3">Email: </Form.Label>
             <Col sm={9}>
             <EmailInputComponent 
-            //  name={"email"}
-                name={"username"}
+             name={"email"}
+                // name={"username"}
                 control={control}
                 errMsg={errors?.email?.message}
             />

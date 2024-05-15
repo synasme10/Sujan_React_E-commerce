@@ -5,10 +5,15 @@ class AuthService extends HttpService{
     login=async(data)=>{
         try{
             const loginResponse=await this.postRequest(
-                '/auth/login',
-                // '/v1/auth/login',
+                // '/auth/login',
+                '/v1/auth/login',
                 data
             )
+            if(loginResponse){
+                //valid login ho bhane
+                localStorage.setItem("_au",loginResponse.result.token)
+                localStorage.setItem("_ud",JSON.stringify(loginResponse.result.userDetail))
+            }
             return loginResponse
         }
         catch(exception){
@@ -18,7 +23,7 @@ class AuthService extends HttpService{
 
     register=async(data)=>{
         try{
-            let registerResponse=await this.postRequest(
+            const registerResponse=await this.postRequest(
                     '/v1/auth/register',
                     data,
                     {file:true}

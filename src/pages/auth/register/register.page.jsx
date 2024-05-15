@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const options = [
-    { value: 'customer', label: 'Customer' },
+    { value: 'admin', label: 'Customer' },
     { value: 'seller', label: 'Seller' }
 ]
 
