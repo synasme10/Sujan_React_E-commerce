@@ -9,10 +9,12 @@ import CmsSidebar from '../../component/cms/sidebar/cms-sidebar.component'
 
 const Adminlayout =()=>{
 
-    let loggedInUser={
-        name:"Sujan Maharjan",
-        role:"admin"
-    }
+    const loggedInUser=JSON.parse(localStorage.getItem("_ud")) || null
+
+    // let loggedInUser={
+    //     name:"Sujan Maharjan",
+    //     role:"admin"
+    // }
   
     return(
         <>

@@ -3,9 +3,10 @@ import SidebarItem from "./sidebar-menu-item.component";
 
 const CmsSidebar=()=>{
 
-    const loggedInUser={
-        name:"Sujan Maharjan"
-    }
+    const loggedInUser=JSON.parse(localStorage.getItem("_ud")) ||null;
+    // const loggedInUser={
+    //     name:"Sujan Maharjan"
+    // }
     const sidebarItems=[
        {
             name:"",

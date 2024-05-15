@@ -61,6 +61,14 @@ class AuthService extends HttpService{
         }
     }
 
+    getLoggedInUserDetail=async()=>{
+        try{
+            const userDetail=await this.getRequest('/v1/auth/me',{auth:true})
+            return userDetail
+        }catch(exception){
+            throw exception
+        }
+    }
 }
 //authservice ko object
 const authsvc=new AuthService();

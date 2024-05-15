@@ -12,10 +12,10 @@ class HttpService {
         if (config && config.auth) {
 
             //todo: login token
-            let token = null;
+            let token = localStorage.getItem("_au") || null;
             this.#headers = {
                 ...this.#headers,
-                "Authorization": "Bearer" + token
+                "Authorization": "Bearer " + token
             }
         }
 
@@ -27,9 +27,10 @@ class HttpService {
         }
     }
 
-    getRequest = async (url, config = null) => {
+    getRequest =async(url, config=null) => {
         try {
             this.getHeaders(config)
+
             const response = await axiosInstance.get(url, {
                 headers: {
                     ...this.#headers

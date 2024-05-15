@@ -1,7 +1,11 @@
 import { Button, Navbar } from 'react-bootstrap'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 const CmsHeader=()=>{
+
+    const navigate=useNavigate();
     const [theme,setTheme]=useState('dark')
     const themechanger=(e)=>{
         let value=theme==='dark'?'light':'dark';
@@ -14,6 +18,27 @@ const CmsHeader=()=>{
         //TODO:
         //localstorage.setItem('sb|sidebar-toggle',document.body.classList.contains('sb-sidenav-toggled'));
     }
+
+    const logout=(e)=>{
+        e.preventDefault()
+        Swal.fire({
+            title: "Are you sure?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Logout"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem("_au")
+                localStorage.removeItem("_ud")
+                navigate('/login')
+                
+            }
+          });
+  
+    }
+
     return(
      <>
           <Navbar className={`sb-topnav`} bg={theme} variant={theme}>
@@ -35,7 +60,7 @@ const CmsHeader=()=>{
                         <li><a className="dropdown-item" href="#!">Settings</a></li>
                         <li><a className="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr className="dropdown-divider" /></li>
-                        <li><a className="dropdown-item" href="#!">Logout</a></li>
+                        <li><a onClick={logout} className="dropdown-item" href="#!">Logout</a></li>
                     </ul>
                 </li>
             </ul>

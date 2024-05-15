@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Form, Button, Image, NavLink } from "react-bootstrap"
 import * as Yup from "yup";
@@ -73,6 +73,18 @@ const RegisterPage = () => {
 
     }
 
+    useEffect(()=>{
+        const token=localStorage.getItem("_au") || null
+        
+        if(token)
+            {
+                const userDetail=JSON.parse(localStorage.getItem("_ud"))||null
+                if(userDetail){
+                    navigate('/'+userDetail.role)
+                }
+                
+            }
+    },[])
     return (
         <>
 

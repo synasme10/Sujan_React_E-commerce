@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container,Row,Col, Form,Button } from "react-bootstrap";
 import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -50,6 +50,19 @@ const LoginPage=()=>{
 
         }
     }
+
+    useEffect(()=>{
+        const token=localStorage.getItem("_au") || null
+        
+        if(token)
+            {
+                const userDetail=JSON.parse(localStorage.getItem("_ud"))||null
+                if(userDetail){
+                    navigate('/'+userDetail.role)
+                }
+                
+            }
+    },[])
     return(
         <>
         
