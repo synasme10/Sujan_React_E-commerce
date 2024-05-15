@@ -69,6 +69,45 @@ class AuthService extends HttpService{
             throw exception
         }
     }
+
+    forgotpassword=async(data)=>{
+        try{
+            const forgotpasswordEmail=await this.postRequest(
+                '/v1/auth/forget-password',
+                data
+            )
+            return forgotpasswordEmail;
+        }catch(exception){
+            throw exception
+        }
+    }
+
+    
+    verifyForgotpwLink= async(token)=>{
+        try{
+            const response=await this.getRequest(
+                '/v1/auth/verify-password-token/'+token       
+            )
+            return response;
+           
+            
+        } catch(exception){
+            throw exception
+        }
+    }
+
+    setForgotpw=async(data,token)=>{
+        try{
+            const response=await this.postRequest(
+                '/v1/auth/set-password/'+token,
+                data,
+            )
+            return response;
+        }catch(exception){
+            throw exception
+        }
+    }
+
 }
 //authservice ko object
 const authsvc=new AuthService();
