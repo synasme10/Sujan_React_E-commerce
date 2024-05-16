@@ -16,7 +16,7 @@ const options = [
 const RegisterPage = () => {
     const registarSchema = Yup.object({
         //key:""
-        name: Yup.string().min(2,"Name should be atlease 2 character long").max(50).required("Username is required"),
+        name: Yup.string().min(2,).max(50).required("Username is required"),
         email: Yup.string().email().required("Email is required"),
         address: Yup.string().min(3,"Name should be atlease 3 character long").max(150).required("Address is required"),
         role: Yup.object({

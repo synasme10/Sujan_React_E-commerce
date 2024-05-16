@@ -86,6 +86,26 @@ export const TextInputComponent = ({ control, errMsg, name }) => {
     )
 }
 
+export const URLInputComponent = ({ control, errMsg, name }) => {
+    const urlController = useController({
+        name: name,
+        control,
+        defaultValue: "",
+      
+    })
+    return (<>
+        <Form.Control
+            type="url"
+            placeholder={`Enter your ${name}`}
+            size="sm"
+            {...urlController.field}
+        //  onChange={handlechange}
+        />
+        <span className="text-danger">{errMsg}</span>
+    </>
+    )
+}
+
 export const TextAreaInputComponent = ({ control, errMsg, name }) => {
     const textAreaController = useController({
         name: name,
@@ -135,6 +155,7 @@ export const ImageUploaderComponent = ({ setError, setThumb, setValue, control, 
     const imageUploadCOntroller = useController({
         name: name,
         control,
+        
     })
     return (<>
         <Form.Control

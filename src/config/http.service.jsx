@@ -69,11 +69,34 @@ class HttpService {
     }
 
     putRequest = async (url, data = null, config = null) => {
-
+        try {
+            this.getHeaders(config)
+            const response = await axiosInstance.put(url, data, {
+                headers: {
+                    ...this.#headers
+                }
+            })
+            return response;
+        }
+        catch (exception) {
+            throw exception
+        }
     }
 
-    deleteRequest = async (url, confil = null) => {
-
+    deleteRequest = async (url, config = null) => {
+        try {
+            this.getHeaders(config)
+            const response = await axiosInstance.delete(url, {
+                headers: {
+                  
+                    ...this.#headers
+                }
+            })
+            return response;
+        }
+        catch (exception) {
+            throw exception
+        }
     }
 
 

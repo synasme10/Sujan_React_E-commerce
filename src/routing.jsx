@@ -18,7 +18,8 @@ import Error404 from "./pages/error/Error404.page";
 import ActivatePage from "./pages/auth/activate/activate.page";
 import CheckPermission from "./config/permission.config";
 import VerifyForgotPage from "./pages/auth/forgotpassword/verifyforgetpw.page";
-import { BannerList } from "./pages/cms/banner";
+import { BannerList,AddBanner,EditBanner } from "./pages/cms/banner";
+import { BrandList,AddBrand,EditBrand } from "./pages/cms/brand";
 
 const Routings=()=>{
     return (
@@ -43,6 +44,13 @@ const Routings=()=>{
             <Route path="/admin" element={<CheckPermission accessBy={"admin"}><Adminlayout/></CheckPermission>}>
               <Route index element={<DashboardPage/>}></Route>
               <Route path="banner" element={<BannerList/>}></Route>
+              <Route path="banner/create" element={<AddBanner/>}></Route>
+              <Route path="banner/:id" element={<EditBanner/>}></Route>
+
+              <Route path="brand" element={<BrandList/>}></Route>
+              <Route path="brand/create" element={<AddBrand/>}></Route>
+              <Route path="brand/:id" element={<EditBrand/>}></Route>
+              
               <Route path="*" element={<Error404 goBackUrl={"/admin"} name={"Admin Page"}/>}/>
             
             </Route>
