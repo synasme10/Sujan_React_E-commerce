@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import SidebarItem from "./sidebar-menu-item.component";
+import { ThemeContext } from "../../../config/theme.config";
 
 const CmsSidebar=()=>{
 
     const loggedInUser=JSON.parse(localStorage.getItem("_ud")) ||null;
+    const {theme}=useContext(ThemeContext)
+
+    // const theme=localStorage.getItem("_tm")
+    console.log("i am them",{theme})
+
     // const loggedInUser={
     //     name:"Sujan Maharjan"
     // }
@@ -96,7 +102,7 @@ const CmsSidebar=()=>{
     return(
         <>
            <div id="layoutSidenav_nav">
-                <nav className={`sb-sidenav accordion sb-sidenav-dark`} id="sidenavAccordion">
+                <nav className={`sb-sidenav accordion sb-sidenav-`+theme} id="sidenavAccordion">
                     <div className="sb-sidenav-menu">
                         <div className="nav">
                             {

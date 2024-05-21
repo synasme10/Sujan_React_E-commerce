@@ -23,6 +23,10 @@ import { BrandList,AddBrand,EditBrand } from "./pages/cms/brand";
 import { ProductList,AddProduct,EditProduct } from "./pages/cms/product";
 import { CategoryList,AddCategory,EditCategory } from "./pages/cms/category";
 import UserList from "./pages/cms/users/user-list.page";
+import { ThemeProvider } from "react-bootstrap";
+import { ThemeProviders } from "./config/theme.config";
+import CategoryDetailPage from "./pages/category/category-detail.page";
+import ProductDetailpage from "./pages/product/product-detail.page";
 
 const Routings=()=>{
     return (
@@ -40,11 +44,15 @@ const Routings=()=>{
               <Route path="forget-password" element={<RenewPasswordPage/>}></Route>
               <Route path="reset-password/:token" element={<VerifyForgotPage/>}></Route>
               <Route path="brand/:slug" element={<BrandDetailPage/>}></Route>
+              <Route path="category/:slug" element={<CategoryDetailPage/>}></Route>
+              <Route path="product/:slug" element={< ProductDetailpage/>}></Route>
               <Route path="about-us" element={<AboutusComponent/>}></Route>          
               <Route path="*" element={<Error404 goBackUrl={"/"} name={"Home Page"}/>}/>
             </Route>
 
-            <Route path="/admin" element={<CheckPermission accessBy={"admin"}><Adminlayout/></CheckPermission>}>
+            <Route path="/admin" element={<CheckPermission accessBy={"admin"}>
+               <Adminlayout/>
+              </CheckPermission>}>
               <Route index element={<DashboardPage/>}></Route>
               <Route path="banner" element={<BannerList/>}></Route>
               <Route path="banner/create" element={<AddBanner/>}></Route>

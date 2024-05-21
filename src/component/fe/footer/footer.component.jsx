@@ -4,7 +4,7 @@ const FeFooter=()=>{
     return(
         <>
         <Container>
-            <Row className="mt-5">
+            <Row className="my-5 py-5">
                 <Col>
                 Named:
                 </Col>

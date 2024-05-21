@@ -7,6 +7,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import BannerComponent from "../../component/fe/home/banner.component";
 import ProductGridList from "../../component/common/product/product-grid.component";
 
+import { useCallback, useEffect, useState } from "react"
+import productSvc from "../cms/product/product.service";
 
 const HomePage =({name}) =>{
 
@@ -41,6 +43,22 @@ const HomePage =({name}) =>{
     //     console.log("I am only called on when data gets updated")
     // },[data])
 
+    const [productList,setProductList]=useState();
+
+    
+    const getProductList=useCallback(async()=>{
+        try{
+            const response=await productSvc.getProductForHomePage();
+            setProductList(response.result);
+            // console.log(response.result)
+        }catch(exception){
+            console.log(exception)
+        }
+    },[])
+
+    useEffect(()=>{
+        getProductList()
+    },[])
 
     return(
         <>
@@ -52,7 +70,7 @@ const HomePage =({name}) =>{
             </Col>
           </Row>
           <Row>
-            <ProductGridList/>
+            <ProductGridList products={productList}/>
           </Row>
         </Container>
       </>

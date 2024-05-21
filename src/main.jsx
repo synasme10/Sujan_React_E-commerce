@@ -8,6 +8,7 @@ import './assets/css/main.css';
 
 import Routings from './routing';
 import { Provider } from 'react-redux';
+import { ThemeProviders } from './config/theme.config';
 
 
 
@@ -49,8 +50,8 @@ const rootElem=ReactDOM.createRoot(root)
 
 rootElem.render(
   <React.StrictMode>
-   {/* <Provider store={store}> */}
-    <Routings/>  
-    {/* </Provider> */}
+    <ThemeProviders>
+    <Routings/>
+    </ThemeProviders>
 </React.StrictMode>
 )

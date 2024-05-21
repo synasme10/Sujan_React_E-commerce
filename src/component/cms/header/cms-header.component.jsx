@@ -1,16 +1,25 @@
 import { Button, Navbar } from 'react-bootstrap'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { ThemeContext } from '../../../config/theme.config'
 
 const CmsHeader=()=>{
 
     const navigate=useNavigate();
-    const [theme,setTheme]=useState('dark')
-    const themechanger=(e)=>{
-        let value=theme==='dark'?'light':'dark';
-        setTheme(value)
-    }
+    const {theme,toggleTheme}=useContext(ThemeContext)
+   
+    // const themechanger=(e)=>{
+    //     e.preventDefault()
+    //     toggleTheme()
+
+    // }
+
+    // const [theme,setTheme]=useState('dark')
+    // const themechanger=(e)=>{
+    //     let value=theme==='dark'?'light':'dark';
+    //     setTheme(value)
+    // }
 
     const sidebarToggle=(e)=>{
         e.preventDefault()
@@ -47,7 +56,7 @@ const CmsHeader=()=>{
             <Button  onClick={sidebarToggle} size='sm' variant='link' className='order-1 order-lg-0 me-4 me-lg-0'>
             <i className={`fas fa-bars text-${theme === 'light'? 'dark':'light'}`}></i>
             </Button>
-            <Button onClick={themechanger} size="sm" variant='link' className={`text-${theme === 'light'? 'dark':'light'}`}>
+            <Button onClick={toggleTheme}  size="sm" variant='link' className={`text-${theme === 'light'? 'dark':'light'}`}>
                 <i className='fas fa-moon'></i>
             </Button>
             <div className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"></div>

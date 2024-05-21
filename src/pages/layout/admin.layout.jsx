@@ -7,10 +7,12 @@ import CmsHeader from '../../component/cms/header/cms-header.component'
 import CmsFooter from '../../component/cms/footer/cms-footer.component'
 import CmsSidebar from '../../component/cms/sidebar/cms-sidebar.component'
 
-const Adminlayout =()=>{
 
+
+const Adminlayout =()=>{
     const loggedInUser=JSON.parse(localStorage.getItem("_ud")) || null
 
+ 
     // let loggedInUser={
     //     name:"Sujan Maharjan",
     //     role:"admin"
