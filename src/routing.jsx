@@ -20,6 +20,9 @@ import CheckPermission from "./config/permission.config";
 import VerifyForgotPage from "./pages/auth/forgotpassword/verifyforgetpw.page";
 import { BannerList,AddBanner,EditBanner } from "./pages/cms/banner";
 import { BrandList,AddBrand,EditBrand } from "./pages/cms/brand";
+import { ProductList,AddProduct,EditProduct } from "./pages/cms/product";
+import { CategoryList,AddCategory,EditCategory } from "./pages/cms/category";
+import UserList from "./pages/cms/users/user-list.page";
 
 const Routings=()=>{
     return (
@@ -50,7 +53,16 @@ const Routings=()=>{
               <Route path="brand" element={<BrandList/>}></Route>
               <Route path="brand/create" element={<AddBrand/>}></Route>
               <Route path="brand/:id" element={<EditBrand/>}></Route>
+
+              <Route path="product" element={<ProductList/>}></Route>
+              <Route path="product/create" element={<AddProduct/>}></Route>
+              <Route path="product/:id" element={<EditProduct/>}></Route>
+
+              <Route path="users" element={<UserList/>}></Route>
               
+              <Route path="category" element={<CategoryList/>}></Route>
+              <Route path="category/create" element={<AddCategory/>}></Route>
+              <Route path="category/:id" element={<EditCategory/>}></Route>
               <Route path="*" element={<Error404 goBackUrl={"/admin"} name={"Admin Page"}/>}/>
             
             </Route>

@@ -50,7 +50,7 @@ const CmsSidebar=()=>{
                 {
                     name:"Products Manager",
                     icon:"fa-basket-shopping",
-                    url:"/admin/products"
+                    url:"/admin/product"
                 },
                 {
                     name:"Order Manager",
