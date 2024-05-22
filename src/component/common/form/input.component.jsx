@@ -128,7 +128,7 @@ export const TextAreaInputComponent = ({ control, errMsg, name }) => {
     )
 }
 
-export const SelectDropDownComponent = ({ control, errMsg, name, options, setValue }) => {
+export const SelectDropDownComponent = ({ control,isMultiple=false, errMsg, name, options, setValue }) => {
     const selectController = useController({
         name: name,
         control,
@@ -139,6 +139,7 @@ export const SelectDropDownComponent = ({ control, errMsg, name, options, setVal
         <Select
             options={options}
             isClearable
+            isMulti={isMultiple}
             onChange={(selOpts) => {
                 setValue(name, selOpts)
             }}

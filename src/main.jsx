@@ -9,6 +9,7 @@ import './assets/css/main.css';
 import Routings from './routing';
 import { Provider } from 'react-redux';
 import { ThemeProviders } from './config/theme.config';
+import store from './store';
 
 
 
@@ -28,7 +29,7 @@ import { ThemeProviders } from './config/theme.config';
 // const HelloWorld= ()=>{
 //   return (
 //     <div>
-    
+
 //     </div>
 
 //   )
@@ -45,13 +46,15 @@ import { ThemeProviders } from './config/theme.config';
 //   }
 // }
 
-const root=document.getElementById("root")
-const rootElem=ReactDOM.createRoot(root)
+const root = document.getElementById("root")
+const rootElem = ReactDOM.createRoot(root)
 
 rootElem.render(
   <React.StrictMode>
     <ThemeProviders>
-    <Routings/>
+      <Provider store={store}>
+        <Routings/>
+      </Provider>
     </ThemeProviders>
-</React.StrictMode>
+  </React.StrictMode>
 )

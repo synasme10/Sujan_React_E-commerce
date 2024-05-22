@@ -65,3 +65,17 @@ b. web storage
 
     yarn aes,crytojs to encrypt and decrypt while storing data in localstorage 
     crytojs ma sha use nagarnu hola decrypot garna mildaina 
+
+    ckeditor for react : data haru html tag ma acha bhaye teslai run garna help 
+    strong tag kunai description ma rakheko cha bhaye tyo strong lai apply garna help
+
+    redux use garda core concept ma kaam garna parxa where u have to use tin ta chij auta store , reducer and action for redux implementation
+    store- central store jaha data state maintain hunxa
+    reducer = tyo central store ma bhayena data,state lai manipulate garna ko lagi lekhne funcation ko action haru lekhne thau bhayo
+    trigger chainxa tyo ho react action
+    -esma chai reducer haru lekhna ali garo cha 
+
+
+
+    redux toolkit-esle chai hamlai chiane official redux ko package, including teslai chaina batteries haru , support ko middleware haru.we use this. 
+    redux toolkit lai react sanga use garne ko lagi hamilai bridge cchainxa tyo bhanya react redux package. Redux is seperate technology that can be use in other any platform(vue, native js, corejs, angular). it is state management platform.

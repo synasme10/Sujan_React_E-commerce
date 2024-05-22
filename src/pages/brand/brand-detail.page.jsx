@@ -21,7 +21,7 @@ const BrandDetailPage=()=>{
 
     useEffect(()=>{
         getBrandDetail()
-    },[])
+    },[params])
     return(
         <>
          <Container className="my-5 py-5">

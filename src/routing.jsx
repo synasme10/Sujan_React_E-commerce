@@ -27,9 +27,38 @@ import { ThemeProvider } from "react-bootstrap";
 import { ThemeProviders } from "./config/theme.config";
 import CategoryDetailPage from "./pages/category/category-detail.page";
 import ProductDetailpage from "./pages/product/product-detail.page";
+import { useCallback, useEffect } from "react";
+import authsvc from "./pages/auth/auth.service";
+import { useDispatch } from "react-redux";
+import { getLoggedInUser } from "./reducer/user.reducer";
+import CartPage from "./pages/cart/cart-list.page";
 
 const Routings=()=>{
-    return (
+
+  const dispatch=useDispatch();
+
+  // const getLoggedInUser=useCallback(async()=>{
+  //   try{
+  //       const detailResponse= await authsvc.getLoggedInUserDetail();
+  //       if (detailResponse.result){
+  //         dispatch(setLoggedInuser(detailResponse.result));
+  //       }
+  //   }
+  //   catch(exception)
+  //   {
+  //     console.log(exception)
+  //   }
+    
+  // },[])
+
+  useEffect(()=>{
+    let token=localStorage.getItem("_au") || null
+    if(token){
+      dispatch(getLoggedInUser())
+    }
+  },[])
+  
+    return (  
       <>
       <ToastContainer theme="colored"/>
     <BrowserRouter>
@@ -45,7 +74,8 @@ const Routings=()=>{
               <Route path="reset-password/:token" element={<VerifyForgotPage/>}></Route>
               <Route path="brand/:slug" element={<BrandDetailPage/>}></Route>
               <Route path="category/:slug" element={<CategoryDetailPage/>}></Route>
-              <Route path="product/:slug" element={< ProductDetailpage/>}></Route>
+              {/* <Route path="product/:slug" element={< ProductDetailpage/>}></Route> */}
+              <Route path="product/:id" element={< ProductDetailpage/>}></Route>
               <Route path="about-us" element={<AboutusComponent/>}></Route>          
               <Route path="*" element={<Error404 goBackUrl={"/"} name={"Home Page"}/>}/>
             </Route>
@@ -74,6 +104,10 @@ const Routings=()=>{
               <Route path="*" element={<Error404 goBackUrl={"/admin"} name={"Admin Page"}/>}/>
             
             </Route>
+            <Route path="/cart" element={<CheckPermission accessBy={"admin"}>
+                <CartPage/>
+            </CheckPermission>}>
+              </Route>
         </Routes>
      </BrowserRouter>
      </>

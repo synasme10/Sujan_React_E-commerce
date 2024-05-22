@@ -8,9 +8,12 @@ import * as Yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup"
 import { toast } from "react-toastify";
 import authsvc from "../auth.service";
+import { useDispatch } from "react-redux";
+import { setLoggedInuser } from "../../../reducer/user.reducer";
 
 
 const LoginPage=()=>{
+    const dispatch=useDispatch();
     const navigate=useNavigate();
     const schema=Yup.object({
         email:Yup.string().email("Invalid email format").required("Emails is required"),
@@ -37,10 +40,17 @@ const LoginPage=()=>{
 
         try{
             const loginData=await authsvc.login(data);
-            console.log(loginData)
+            dispatch(setLoggedInuser(loginData.result.userDetail))
             toast.success(`Welcome to ${loginData.result.userDetail.role} Panel`)
-            // console.log("I am login")
-            navigate("/"+loginData.result.userDetail.role)
+
+            let redirectUrl="/"+loginData.result.userDetail.role;
+            if(localStorage.getItem('_redirectUrl')){
+                redirectUrl=localStorage.getItem('_redirectUrl');
+                localStorage.removeItem('_redirectUrl')
+            }
+            // console.log("I am login")console.log(loginData)
+            // navigate("/"+loginData.result.userDetail.role)
+            navigate(redirectUrl)
         }
         catch(exception){
             console.log(exception)

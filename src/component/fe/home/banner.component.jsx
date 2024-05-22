@@ -52,6 +52,7 @@ const BannerComponent =()=>{
                   <CarouselItem key={ind}>
                     <a target="_banner" href={banner.url}> 
                   <img onError={showPlaceholder} src={import.meta.env.VITE_IMAGE_URL+'/'+banner.image} className='d-block w-100' alt='...' />
+                  
                   </a>
                 </CarouselItem>
                 ))

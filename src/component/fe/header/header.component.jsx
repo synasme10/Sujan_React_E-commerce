@@ -1,56 +1,77 @@
 
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Navbar, Container, Nav, NavDropdown, Form, Button } from "react-bootstrap";
 import { NavLink, useSearchParams } from "react-router-dom";
 import Swal from 'sweetalert2'
 import authsvc from "../../../pages/auth/auth.service";
 import { ThemeContext } from "../../../config/theme.config";
+import { useSelector } from "react-redux";
+import cartSvc from "../../../pages/cms/cart/cart.service";
 
 const FeHeader = () => {
 
-  const[loggedInUser,setLoggedInUser]=useState();
+  // const[loggedInUser,setLoggedInUser]=useState();
   const [query, setQuery] = useSearchParams();
-  
-
   const {theme,toggleTheme}=useContext(ThemeContext)
+  const [totalCount,setTotalCount]=useState();
+
+  //root is central store data stored in store page
+  const loggedInUser=useSelector((root)=>{
+    return root?.User?.user;
+  });
+
+  const getCartDetail=useCallback(async()=>{
+      try{
+        const response=await cartSvc.getMyCart()
+        setTotalCount(response?.meta?.totalCount)
+      }catch(exception){
+        console.log(exception)
+      }
+  },[])
+
+  useEffect(()=>{
+    getCartDetail()
+  },[])
   // const loggedInUser = JSON.parse(localStorage.getItem("_ud")) || null;
   //store data from one component that can be shared with other component- Redux ,alternative of Redux localStorage
 
-  const getLoggedInUser=async()=>{
-    try{
-      const response=await authsvc.getLoggedInUserDetail()
-      // console.log(response)
-      setLoggedInUser(response.result)
 
-    }catch(exception){
+  //eslai redux le hatayo 
+  // const getLoggedInUser=async()=>{
+  //   try{
+  //     const response=await authsvc.getLoggedInUserDetail()
+  //     // console.log(response)
+  //     setLoggedInUser(response.result)
 
-    }
-  }
+  //   }catch(exception){
+
+  //   }
+  // }
     
-  useEffect(()=>{
-    if(localStorage.getItem("_au")){
-      getLoggedInUser()
+  // useEffect(()=>{
+  //   if(localStorage.getItem("_au")){
+  //     getLoggedInUser()
+  //   }
+  // },[])
+
+const logout=(e)=>{
+        e.preventDefault()
+        Swal.fire({
+            title: "Are you sure?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Logout"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem("_au")
+                localStorage.removeItem("_ud")
+                navigate('/login')
+            }
+          });
+  
     }
-  },[])
-
-  const logout=(e)=>{
-    e.preventDefault()
-    Swal.fire({
-        title: "Are you sure?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Logout"
-      }).then((result) => {
-        if (result.isConfirmed) {
-            localStorage.removeItem("_au")
-            localStorage.removeItem("_ud")
-            navigate('/')
-        }
-      });
-
-}
 
 // console.log(loggedInUser)
   return (
@@ -77,8 +98,12 @@ const FeHeader = () => {
               <NavLink className={"dropdown-item"} to="/brand/apple">Apple</NavLink>
               <NavLink className={"dropdown-item"} to="/brand/lg">LG</NavLink>
               <NavLink className={"dropdown-item"} to="/brand/samsung">Samsung</NavLink>
+            </NavDropdown>
 
-
+            <NavDropdown title="Category" id="baisc-nav-dropdown">
+              <NavLink  className={"dropdown-item"} to="/category/clothing">Clothings</NavLink>
+              <NavLink  className={"dropdown-item"} to="/category/smart-phone">Smartphone</NavLink>
+             
             </NavDropdown>
             {/* <Nav.Item>
         <NavLink className="nav-link" to="#">Disabled</NavLink>
@@ -100,7 +125,11 @@ const FeHeader = () => {
           </Form>
           
           <Nav>
-        
+              <Nav.Item>
+                <NavLink className="nav-link" to="/cart">
+                  Cart({totalCount|| 0})
+                </NavLink>
+              </Nav.Item>
             {
               loggedInUser ? <>
                 <Nav.Item>

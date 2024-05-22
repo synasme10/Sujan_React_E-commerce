@@ -1,8 +1,23 @@
 import { Outlet } from "react-router-dom";
 import FeFooter from "../../component/fe/footer/footer.component";
 import FeHeader from "../../component/fe/header/header.component";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { sayHello } from "../../reducer/user.reducer";
+
 
 const HomePageLayout=()=>{  
+  //actions trigger
+  //dispatch jaile redux/reducer ko method lai garne 
+  //dispatch test
+
+  // const dispatch=useDispatch();
+  // useEffect(()=>{
+  //   dispatch(sayHello("hello world"))
+  // },[])
+
+  //reducer or state lai listen garxu 
+
   return(
         <>
            <FeHeader/>
