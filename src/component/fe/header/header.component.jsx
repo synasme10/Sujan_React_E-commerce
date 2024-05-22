@@ -1,7 +1,7 @@
 
 import { useCallback, useContext, useEffect, useState } from "react";
 import { Navbar, Container, Nav, NavDropdown, Form, Button } from "react-bootstrap";
-import { NavLink, useSearchParams } from "react-router-dom";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import Swal from 'sweetalert2'
 import authsvc from "../../../pages/auth/auth.service";
 import { ThemeContext } from "../../../config/theme.config";
@@ -11,6 +11,7 @@ import cartSvc from "../../../pages/cms/cart/cart.service";
 const FeHeader = () => {
 
   // const[loggedInUser,setLoggedInUser]=useState();
+  // const navigate=useNavigate();
   const [query, setQuery] = useSearchParams();
   const {theme,toggleTheme}=useContext(ThemeContext)
   const [totalCount,setTotalCount]=useState();
@@ -30,7 +31,10 @@ const FeHeader = () => {
   },[])
 
   useEffect(()=>{
-    getCartDetail()
+    let token=localStorage.getItem("_au")||null;
+    if(token){
+      getCartDetail()
+    }
   },[])
   // const loggedInUser = JSON.parse(localStorage.getItem("_ud")) || null;
   //store data from one component that can be shared with other component- Redux ,alternative of Redux localStorage

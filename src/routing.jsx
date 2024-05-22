@@ -75,8 +75,13 @@ const Routings=()=>{
               <Route path="brand/:slug" element={<BrandDetailPage/>}></Route>
               <Route path="category/:slug" element={<CategoryDetailPage/>}></Route>
               {/* <Route path="product/:slug" element={< ProductDetailpage/>}></Route> */}
+             
               <Route path="product/:id" element={< ProductDetailpage/>}></Route>
-              <Route path="about-us" element={<AboutusComponent/>}></Route>          
+              <Route path="about-us" element={<AboutusComponent/>}></Route>     
+              <Route path="/cart" element={<CheckPermission accessBy={"admin"}>
+                <CartPage/>
+            </CheckPermission>}>
+              </Route>     
               <Route path="*" element={<Error404 goBackUrl={"/"} name={"Home Page"}/>}/>
             </Route>
 
@@ -104,10 +109,7 @@ const Routings=()=>{
               <Route path="*" element={<Error404 goBackUrl={"/admin"} name={"Admin Page"}/>}/>
             
             </Route>
-            <Route path="/cart" element={<CheckPermission accessBy={"admin"}>
-                <CartPage/>
-            </CheckPermission>}>
-              </Route>
+           
         </Routes>
      </BrowserRouter>
      </>
