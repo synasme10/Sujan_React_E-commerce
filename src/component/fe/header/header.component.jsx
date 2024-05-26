@@ -14,28 +14,34 @@ const FeHeader = () => {
   // const navigate=useNavigate();
   const [query, setQuery] = useSearchParams();
   const {theme,toggleTheme}=useContext(ThemeContext)
-  const [totalCount,setTotalCount]=useState();
+  // const [totalCount,setTotalCount]=useState();
+
 
   //root is central store data stored in store page
   const loggedInUser=useSelector((root)=>{
     return root?.User?.user;
   });
 
-  const getCartDetail=useCallback(async()=>{
-      try{
-        const response=await cartSvc.getMyCart()
-        setTotalCount(response?.meta?.totalCount)
-      }catch(exception){
-        console.log(exception)
-      }
-  },[])
+  let totalCount=useSelector((root)=>{
+    return root?.Cart?.total || 0
+  });
 
-  useEffect(()=>{
-    let token=localStorage.getItem("_au")||null;
-    if(token){
-      getCartDetail()
-    }
-  },[])
+  // const getCartDetail=useCallback(async()=>{
+  //     try{
+  //       const response=await cartSvc.getMyCart()
+  //       setTotalCount(response?.meta?.totalCount)
+  //     }catch(exception){
+  //       console.log(exception)
+  //     }
+  // },[])
+
+  // useEffect(()=>{
+  //   let token=localStorage.getItem("_au")||null;
+  //   if(token){
+  //     getCartDetail()
+  //   }
+  // },[])
+
   // const loggedInUser = JSON.parse(localStorage.getItem("_ud")) || null;
   //store data from one component that can be shared with other component- Redux ,alternative of Redux localStorage
 

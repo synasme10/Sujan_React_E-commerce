@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import productSvc from "../cms/product/product.service";
 import { SingleProduct } from "../../component/common/product/single-product.component";
 import cartSvc from "../cms/cart/cart.service";
+import { useDispatch } from "react-redux";
+import { getCartDetail } from "../../reducer/cart.reducer";
 
 const ProductDetailpage = () => {
     const navigate = useNavigate()
@@ -15,6 +17,8 @@ const ProductDetailpage = () => {
     const [qty, setQty]=useState(0);
     const [qtyErr, setErr] = useState()
     const params = useParams();
+
+    const dispatch=useDispatch();
 
     //brower refresh  garda data ma change kei ako chiana (slug ma) or state reset reupdate hudaina detail fetch ma bhane previous call memomize garera rakhxa,  
 
@@ -50,6 +54,7 @@ const ProductDetailpage = () => {
             if (!token) {
                 localStorage.setItem("_redirectUrl", '/product/' + detail.slug)
                 toast.warning("Please login first to add item in cart")
+                dispatch(getCartDetail())
                 navigate('/login')
             } else {
                 const cartItem = {

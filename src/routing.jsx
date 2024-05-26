@@ -32,6 +32,7 @@ import authsvc from "./pages/auth/auth.service";
 import { useDispatch } from "react-redux";
 import { getLoggedInUser } from "./reducer/user.reducer";
 import CartPage from "./pages/cart/cart-list.page";
+import { getCartDetail } from "./reducer/cart.reducer";
 
 const Routings=()=>{
 
@@ -55,6 +56,7 @@ const Routings=()=>{
     let token=localStorage.getItem("_au") || null
     if(token){
       dispatch(getLoggedInUser())
+      dispatch(getCartDetail())
     }
   },[])
   
