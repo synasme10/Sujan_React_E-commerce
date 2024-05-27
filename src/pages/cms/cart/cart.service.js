@@ -39,6 +39,19 @@ class CartService extends HttpService{
         }
     }
 
+    paymentKhalti=async(data)=>{
+        try{
+            const response=await this.postRequest('https://khalti.com/ebanking/initiate/',data, { headers:{
+                'Authorization': 'key live_secret_key_68791341fdd94846a146f0457ff7b455',
+                'Content-Type': 'application/json',
+                }})
+            // console.log(response);
+            return response;
+        }catch(exception){
+            throw exception;
+        }
+    }
+
 }
 
 //object cart service ko banako

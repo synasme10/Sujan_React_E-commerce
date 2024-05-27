@@ -11245,3 +11245,16 @@ body {
 .banner-small{
   max-width:140px;
 }
+
+.nav-links{
+  color:grey;
+  text-decoration: none;
+}
+
+.nav-links:hover{
+  color: lightgray;
+  text-decoration: underline;
+}
+
+
+

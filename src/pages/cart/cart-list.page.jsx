@@ -6,6 +6,9 @@ import { Container,Row,Col, Table, Image, Button } from "react-bootstrap";
 import LoadingComponent from "../../component/common/loading/loading.component";
 import { useDispatch } from "react-redux";
 import { getCartDetail as getMyCartDetail } from "../../reducer/cart.reducer";
+import { ESEWA_SCD, ESEWA_TEST_PID } from "../../config/payment.config";
+import axios from "axios";
+import PaymentEsewa from "./esewa-payment";
 
 
 const CartPage = () => {
@@ -37,12 +40,50 @@ const CartPage = () => {
             toast.success(result.message)
             //TODO: you have to integrate payment gateway
             // 
+            paymentViaEsewa()
+           
         }catch(exception){
             console.log(exception)
             toast.error("Sorry, can't Checkout at the moment")
         }
     }
 
+    const paymentViaEsewa=async()=>{
+        // const datas={
+        //     amt: 1000,
+        //     psc: 0,
+        //     pdc: 0,
+        //     txAmt: 0,
+        //     tAmt: 100,
+        //     pid: ESEWA_TEST_PID,
+        //     scd: ESEWA_SCD,
+        //     su: "http://d2evy.csb.app/success",
+        //     fu: "http://d2evy.csb.app/failed"   
+        // }
+        
+        
+
+        try{
+            const datas={
+            return_url: "http://example.com/",
+            website_url: "https://example.com/",
+            amount: "1000",
+            purchase_order_id: "Order01",
+            purchase_order_name: "test",
+            customer_info: {
+                name: "Ram Bahadur",
+                email: "test@khalti.com",
+                phone: "9800000001"
+        }}
+            const response=await cartSvc.paymentKhalti(datas);
+            console.log(response)
+        }catch(exception)
+        {
+            console.log(exception)
+        }
+      
+    }       
+    
     const getCartDetail = useCallback(async () => {
         try {
             let token=localStorage.getItem("_au")||null
@@ -168,11 +209,17 @@ const CartPage = () => {
                             <Button variant="warning" size="sm" onClick={checkOutOrder}>
                                 Checkout
                             </Button>
+                            
+                            <Button variant="success" size="sm" onClick={paymentViaEsewa}>
+                                    Esewa
+                            </Button>
                         </Col>
+                     
 
                     </Row>
                 </>
             }
+            
         </Container>
 
     </>)
