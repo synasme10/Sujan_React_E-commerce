@@ -14,7 +14,7 @@ const BannerComponent =()=>{
     try{
       const response=await bannerSvc.getBannerForHomePage();
       setBannerData(response.result)
-      console.log(response)
+      // console.log(response)
     }catch(exception){
       console.log(exception)
     }

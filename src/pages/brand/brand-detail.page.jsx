@@ -26,7 +26,8 @@ const BrandDetailPage=()=>{
         <>
          <Container className="my-5 py-5">
         <Row>
-            <Col>Category Detail:
+            <Col>
+            <h4>Brand Detail</h4>
             </Col>
         </Row>
         <Row className="my-3">

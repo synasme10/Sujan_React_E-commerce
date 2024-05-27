@@ -1,19 +1,21 @@
-import { Card,Container,Row,Col,CardBody,CardFooter,Form,Image, Button } from "react-bootstrap";
+import { Card, Container, Row, Col, CardBody, CardFooter, Form, Image, Button } from "react-bootstrap";
 import AdminBreadCrumb from "../../../component/cms/breadcrumb/breadcrumb.component";
 
 import { NavLink, useNavigate } from "react-router-dom";
 import { ImageUploaderComponent, SelectDropDownComponent, TextInputComponent, URLInputComponent } from "../../../component/common/form/input.component";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import productSvc from "./product.service";
 import { toast } from "react-toastify";
+import categorySvc from "../category/category.service";
+import brandSvc from "../brand/brand.service";
 
-const AddProduct=()=>{
+const AddProduct = () => {
 
 
-    const productRules=Yup.object({
+    const productRules = Yup.object({
         // title:Yup.string().min(2,"Title should be atlease 4 character long").required("Title is required"),
         // tagline:Yup.string().required("Tagline is required"),
         // status:Yup.object({
@@ -23,65 +25,97 @@ const AddProduct=()=>{
         // image:Yup.string().required(),
     })
 
-    const navigate=useNavigate();
+    const navigate = useNavigate();
+    const [brand, setBrand] = useState();
+    const [category, setCategory] = useState();
     const [thumb, setThumb] = useState();
-    const [loading,setLoading]=useState(false);
-    const {control,handleSubmit,setError,setValue,formState:{errors}}=useForm({
-        resolver:yupResolver(productRules)
+    const [loading, setLoading] = useState(false);
+    const { control, handleSubmit, setError, setValue, formState: { errors } } = useForm({
+        resolver: yupResolver(productRules)
     });
 
-    const submitForm=async(data)=>{
-        try{
+    const submitForm = async (data) => {
+        try {
             setLoading(true);
-            const formattedData={
+            const formattedData = {
                 ...data,
-                status:data.status.value
+                status: data.status.value,
+                category:data.category.value,
+                brand:data.brand.value
                 // category:data.category.value,
                 // brand:data.brand.value
             }
-             console.log(formattedData)
-            const response=await productSvc.postProducts(formattedData)
+            console.log(formattedData)
+            const response = await productSvc.postProducts(formattedData)
             toast.success(response?.message)
             navigate('/admin/product')
             // console.log(response)
-            
+
 
             // console.log(data)
-        }catch(exception){
+        } catch (exception) {
             console.log(exception)
             toast.error(exception?.data?.message)
-        }finally{
+        } finally {
             setLoading(false)
         }
     }
 
+    const getAllBrands = async (config) => {
+        try {
+            const brandresult = await brandSvc.listAllBrands(config);
+            console.log()
+            setBrand(brandresult.result)
+
+        } catch (exception) {
+            console.log(exception)
+        }
+    }
+
+    const getAllCategorys = async (config) => {
+        try {
+            const categoryresult = await categorySvc.listAllCategorys(config);
+            console.log()
+            setCategory(categoryresult.result)
+
+        } catch (exception) {
+            console.log(exception)
+        }
+    }
+
+    useEffect(() => {
+        getAllBrands({ page: 1, limit: 15, search: null })
+        getAllCategorys({ page: 1, limit: 15, search: null })
+    }, [])
+
+
     // console.log({errors}) check errors
-    return(
+    return (
         <>
-        <div className="container-fluid px-4">
+            <div className="container-fluid px-4">
                 <h1 className="mt-4">Add product</h1>
                 {/* {TODO:Dynamic Control} */}
                 <AdminBreadCrumb
                     data={
                         [
                             {
-                                title:"Home",
-                                link:"/"
+                                title: "Home",
+                                link: "/"
                             },
                             {
-                                title:"Dashboard",
-                                link:"/admin"
+                                title: "Dashboard",
+                                link: "/admin"
                             },
-                          
+
                             {
-                            title:"product List",
-                            link:"/admin/product"
+                                title: "product List",
+                                link: "/admin/product"
                             },
                             {
-                                title:"Add product",
-                                link:null
-                                }
-                    ]
+                                title: "Add product",
+                                link: null
+                            }
+                        ]
                     }
                 />
 
@@ -90,9 +124,9 @@ const AddProduct=()=>{
                         <Container>
                             <Row>
                                 <Col sm={12} md={6}>
-                                <h4>
-                                    product List
-                                </h4>
+                                    <h4>
+                                        product List
+                                    </h4>
                                 </Col>
                                 <Col sm={12} md={6}>
                                     <NavLink className={"btn btn-sm btn-success float-end"} to="/admin/product/create">
@@ -108,9 +142,9 @@ const AddProduct=()=>{
                                 <Form.Label className="col-sm-3">Product:</Form.Label>
                                 <Col sm={9}>
                                     <TextInputComponent
-                                    name={'title'}
-                                    control={control}
-                                    errMsg={errors?.title?.message}
+                                        name={'title'}
+                                        control={control}
+                                        errMsg={errors?.title?.message}
                                     />
                                 </Col>
                             </Form.Group>
@@ -118,28 +152,30 @@ const AddProduct=()=>{
                                 <Form.Label className="col-sm-3">Description:</Form.Label>
                                 <Col sm={9}>
                                     <TextInputComponent
-                                    name={'description'}
-                                    control={control}
-                                    errMsg={errors?.description?.message}
+                                        name={'description'}
+                                        control={control}
+                                        errMsg={errors?.description?.message}
                                     />
                                 </Col>
                             </Form.Group>
-                           
+
+
                             <Form.Group className="row mb-3">
                                 <Form.Label className="col-sm-3">Category:</Form.Label>
                                 <Col sm={9}>
                                     <SelectDropDownComponent
-                                    name={'category'}
-                                    control={control}
-                                    errMsg={errors?.status?.message}
-                                    options={
-                                        [
-                                        {value:"sujan",label:"Publish"},
-                                        {value:"sujan",label:"Un-Publish"},
-                                        ]
-                                    }
-                                    setValue={setValue}
+                                        name={'category'}
+                                        control={control}
+                                        errMsg={errors?.category?.message}
+                                        const options={category && category.map(d=>({
+                                            "value":d._id,
+                                            "label":d.title
+
+                                        }))}
+                                        
+                                        setValue={setValue}
                                     />
+                                   
                                 </Col>
                             </Form.Group>
 
@@ -147,33 +183,56 @@ const AddProduct=()=>{
                                 <Form.Label className="col-sm-3">Brand:</Form.Label>
                                 <Col sm={9}>
                                     <SelectDropDownComponent
-                                    name={'brand'}
-                                    control={control}
-                                    errMsg={errors?.status?.message}
-                                    options={
-                                        [
-                                        {value:"sujan",label:"Publish"},
-                                        {value:"sujan",label:"Un-Publish"},
-                                        ]
-                                    }
-                                    setValue={setValue}
+                                        name={'brand'}
+                                        control={control}
+                                        errMsg={errors?.brand?.message}
+                                       options={brand && brand.map(b=>({
+                                            "value":b._id,
+                                            "label":b.title
+
+                                        }))}
+                                        setValue={setValue}
                                     />
                                 </Col>
                             </Form.Group>
+
+                            <Form.Group className="row mb-3">
+                                <Form.Label className="col-sm-3">Price:</Form.Label>
+                                <Col sm={9}>
+                                    <TextInputComponent
+                                        name={'price'}
+                                        control={control}
+                                        errMsg={errors?.price?.message}
+                                    />
+                                </Col>
+                            </Form.Group>
+
+                            <Form.Group className="row mb-3">
+                                <Form.Label className="col-sm-3">Discount(In %):</Form.Label>
+                                <Col sm={9}>
+                                    <TextInputComponent
+                                        name={'discount'}
+                                        control={control}
+                                        errMsg={errors?.discount?.message}
+                                    />
+                                </Col>
+                            </Form.Group>
+
+
                             <Form.Group className="row mb-3">
                                 <Form.Label className="col-sm-3">Status:</Form.Label>
                                 <Col sm={9}>
                                     <SelectDropDownComponent
-                                    name={'status'}
-                                    control={control}
-                                    errMsg={errors?.status?.message}
-                                    options={
-                                        [
-                                        {value:"active",label:"Publish"},
-                                        {value:"inactive",label:"Un-Publish"},
-                                        ]
-                                    }
-                                    setValue={setValue}
+                                        name={'status'}
+                                        control={control}
+                                        errMsg={errors?.status?.message}
+                                        options={
+                                            [
+                                                { value: "active", label: "Publish" },
+                                                { value: "inactive", label: "Un-Publish" },
+                                            ]
+                                        }
+                                        setValue={setValue}
                                     />
                                 </Col>
                             </Form.Group>
@@ -188,7 +247,7 @@ const AddProduct=()=>{
                                         setValue={setValue}
                                         setThumb={setThumb}
                                     />
-                                   
+
                                 </Col>
                                 <Col sm={2}>
                                     <Image fluid alt="thumbnail"
@@ -212,7 +271,7 @@ const AddProduct=()=>{
 
                     </CardFooter>
                 </Card>
-               
+
             </div>
         </>
     )

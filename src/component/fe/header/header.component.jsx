@@ -8,12 +8,17 @@ import { ThemeContext } from "../../../config/theme.config";
 import { useSelector } from "react-redux";
 import cartSvc from "../../../pages/cms/cart/cart.service";
 import logo1 from "../../../assets/images/logo1.png"
+import brandSvc from "../../../pages/cms/brand/brand.service";
+import categorySvc from "../../../pages/cms/category/category.service";
 
 const FeHeader = () => {
 
   // const[loggedInUser,setLoggedInUser]=useState();
   // const navigate=useNavigate();
+  const [brand, setBrand] = useState();
+  const [category, setCategory] = useState();
   const [query, setQuery] = useSearchParams();
+
   const { theme, toggleTheme } = useContext(ThemeContext)
   // const [totalCount,setTotalCount]=useState();
 
@@ -26,6 +31,33 @@ const FeHeader = () => {
   let totalCount = useSelector((root) => {
     return root?.Cart?.total || 0
   });
+
+  const getAllBrands = async (config) => {
+    try {
+        const brandresult = await brandSvc.listAllBrands(config);
+        console.log()
+        setBrand(brandresult.result)
+        
+    } catch (exception) {
+        console.log(exception)
+    } 
+}
+
+const getAllCategorys = async (config) => {
+  try {
+      const categoryresult = await categorySvc.listAllCategorys(config);
+      console.log()
+      setCategory(categoryresult.result)
+      
+  } catch (exception) {
+      console.log(exception)
+  } 
+}
+
+  useEffect(()=>{
+    getAllBrands({ page: 1, limit: 15, search: null })
+    getAllCategorys({ page: 1, limit: 15, search: null })
+  },[])
 
   // const getCartDetail=useCallback(async()=>{
   //     try{
@@ -114,15 +146,19 @@ const FeHeader = () => {
               <NavLink className="nav-link" to="/about-us">About Us</NavLink>
             </Nav.Item>
             <NavDropdown title="Brand" id="brand-dropdown">
-              <NavLink className={"dropdown-item"} to="/brand/apple">Apple</NavLink>
-              <NavLink className={"dropdown-item"} to="/brand/lg">LG</NavLink>
-              <NavLink className={"dropdown-item"} to="/brand/samsung">Samsung</NavLink>
+              {
+                brand && brand.map((brand,ind)=>(
+                  <NavLink className={"dropdown-item"} key={ind} to={"/brand/"+brand.slug}>{brand.title}</NavLink>
+                ))
+              }
             </NavDropdown>
 
             <NavDropdown title="Category" id="baisc-nav-dropdown">
-              <NavLink className={"dropdown-item"} to="/category/clothing">Clothings</NavLink>
-              <NavLink className={"dropdown-item"} to="/category/smart-phone">Smartphone</NavLink>
-
+            {
+                category && category.map((cat,ind)=>(
+                  <NavLink className={"dropdown-item"} key={ind} to={"/category/"+cat.slug}>{cat.title}</NavLink>
+                ))
+              }
             </NavDropdown>
             {/* <Nav.Item>
         <NavLink className="nav-link" to="#">Disabled</NavLink>
@@ -144,13 +180,14 @@ const FeHeader = () => {
           </Form>
 
           <Nav>
-            <Nav.Item>
+            
+            {
+              loggedInUser ? <>
+              <Nav.Item>
               <NavLink className="nav-link" to="/cart">
                 Cart({totalCount || 0})
               </NavLink>
             </Nav.Item>
-            {
-              loggedInUser ? <>
                 <Nav.Item>
                   {/* html tag (jsx) bitra javascipt variable {} data dekhauna paryo bhane interpolet garna parxa {} */}
 
