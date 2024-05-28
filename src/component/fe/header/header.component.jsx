@@ -55,8 +55,13 @@ const getAllCategorys = async (config) => {
 }
 
   useEffect(()=>{
-    getAllBrands({ page: 1, limit: 15, search: null })
-    getAllCategorys({ page: 1, limit: 15, search: null })
+    const token=localStorage.getItem("_au")|| null;
+    if(token){
+      getAllBrands({ page: 1, limit: 15, search: null })
+      getAllCategorys({ page: 1, limit: 15, search: null })
+    }
+
+    
   },[])
 
   // const getCartDetail=useCallback(async()=>{

@@ -17,7 +17,6 @@ const EditBrand=()=>{
 
     const brandRules=Yup.object({
         title:Yup.string().min(2,"Title should be atlease 2 character long").required("Title is required"),
-        tagline:Yup.string().required("Tagline is required"),
         status:Yup.object({
             label:Yup.string().matches(/^(Publish|Un-Publish)$/,"Status should be either Publish or Unpublish"),
             value:Yup.string().matches(/^(active|inactive)$/,"value should be either active or inactive"),
@@ -113,7 +112,7 @@ const EditBrand=()=>{
                             <Row>
                                 <Col sm={12} md={6}>
                                 <h4>
-                                    Brand List
+                                    Brand Edit
                                 </h4>
                                 </Col>
                                

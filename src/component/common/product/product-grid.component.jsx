@@ -6,7 +6,7 @@ const ProductGridList=({products})=>{
 
     return(
         <>
-        <Row className="my-10">
+        <Row>
             {
                 products && products.map((prod,ind)=>(
                     <React.Fragment key={ind}>

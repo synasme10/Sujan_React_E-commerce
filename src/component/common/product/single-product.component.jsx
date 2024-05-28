@@ -7,14 +7,14 @@ export const SingleProduct=({product})=>{
         e.target.src = "https://placehold.co/300x250?text=No+Image+Found"
     }
     return(<>
-    <Card style={{ width: '18rem' }}>
+    <Card className="productlist-design mt-4" style={{width:"270px"}}>
                 <Card.Img onError={showError} variant="top" src={import.meta.env.VITE_IMAGE_URL + "/" + product.images[0]} />
                 <Card.Body>
                     <Card.Title as={'h6'} >
-                        <NavLink to={`/product/`+product._id} style={{textDecoration:"none"}}>{product.title}</NavLink>
+                        <NavLink className="link-product" to={`/product/`+product._id} ><span className="product-title">{product.title}</span></NavLink>
                     </Card.Title>
                     <Card.Text>
-                        <span className="me-3">Npr.{product.afterDiscount}</span>
+                        <span className="me-3">Rs. {product.afterDiscount}</span>
 
                         {
                             product.discount > 0 ? <> <del className="text-danger"> Npr.{product.price} </del></> : <></>
@@ -35,7 +35,7 @@ export const SingleProduct=({product})=>{
                     </Card.Text>
 
                 </Card.Body>
-                <Card.Footer className="bg-warning text-end" >
+                <Card.Footer className="bg-light text-end" >
                 <NavLink to={`/product/`+product.slug} className={'btn btn-link'}><i className="fa fa-shopping-cart" aria-hidden="true"></i></NavLink>
                 </Card.Footer>
             </Card>
@@ -45,7 +45,7 @@ const SingleProductItem = ({product}) => {
    
     //console.log(product) 
     return (<>
-      <Col sm={6} md={4} lg={3} className="mb-5">
+      <Col className="mb-3 me-2">
             <SingleProduct product={product}></SingleProduct>
         </Col>
     </>)

@@ -84,8 +84,12 @@ const AddProduct = () => {
     }
 
     useEffect(() => {
-        getAllBrands({ page: 1, limit: 15, search: null })
-        getAllCategorys({ page: 1, limit: 15, search: null })
+        let token=localStorage.getItem("_au")||null;
+        if(token){
+            getAllBrands({ page: 1, limit: 15, search: null })
+            getAllCategorys({ page: 1, limit: 15, search: null })
+        }
+     
     }, [])
 
 

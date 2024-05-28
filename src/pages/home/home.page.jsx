@@ -63,13 +63,13 @@ const HomePage =({name}) =>{
     return(
         <>
         <BannerComponent/>
-        <Container className="my-3">
+        <Container fluid style={{backgroundColor:"#ffffff"}}className="products-list ps-5" >
           <Row>
             <Col>
               <h2>Product Lists</h2>
             </Col>
           </Row>
-          <Row>
+          <Row >
             <ProductGridList products={productList}/>
           </Row>
         </Container>

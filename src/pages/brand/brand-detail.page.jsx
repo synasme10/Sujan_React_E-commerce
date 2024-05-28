@@ -24,13 +24,13 @@ const BrandDetailPage=()=>{
     },[params])
     return(
         <>
-         <Container className="my-5 py-5">
+         <Container fluid className="ps-5 my-4 ">
         <Row>
             <Col>
-            <h4>Brand Detail</h4>
+            <h5 style={{textTransform:"capitalize",textDecoration:"none"}}><a className="link-product" href={"/brand/"+params.slug}>{params.slug}</a></h5>
             </Col>
         </Row>
-        <Row className="my-3">
+        <Row >
             {
                 products && products.length>0 ?<>
                     <ProductGridList products={products} />

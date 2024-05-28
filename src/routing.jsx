@@ -33,6 +33,7 @@ import { useDispatch } from "react-redux";
 import { getLoggedInUser } from "./reducer/user.reducer";
 import CartPage from "./pages/cart/cart-list.page";
 import { getCartDetail } from "./reducer/cart.reducer";
+import CustomerPanel from "./pages/customer/customerpanel/customer-panel";
 
 const Routings=()=>{
 
@@ -83,7 +84,8 @@ const Routings=()=>{
               <Route path="/cart" element={<CheckPermission accessBy={"admin"}>
                 <CartPage/>
             </CheckPermission>}>
-              </Route>     
+              </Route> 
+              <Route path="/customer" element={<CustomerPanel/>}></Route>    
               <Route path="*" element={<Error404 goBackUrl={"/"} name={"Home Page"}/>}/>
             </Route>
 
