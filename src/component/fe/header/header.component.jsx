@@ -14,7 +14,7 @@ import categorySvc from "../../../pages/cms/category/category.service";
 const FeHeader = () => {
 
   // const[loggedInUser,setLoggedInUser]=useState();
-  // const navigate=useNavigate();
+  const navigate=useNavigate();
   const [brand, setBrand] = useState();
   const [category, setCategory] = useState();
   const [query, setQuery] = useSearchParams();

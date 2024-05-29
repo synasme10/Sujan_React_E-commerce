@@ -174,9 +174,8 @@ const AddProduct = () => {
                                         const options={category && category.map(d=>({
                                             "value":d._id,
                                             "label":d.title
-
                                         }))}
-                                        
+                                      
                                         setValue={setValue}
                                     />
                                    

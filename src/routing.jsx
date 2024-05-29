@@ -34,6 +34,7 @@ import { getLoggedInUser } from "./reducer/user.reducer";
 import CartPage from "./pages/cart/cart-list.page";
 import { getCartDetail } from "./reducer/cart.reducer";
 import CustomerPanel from "./pages/customer/customerpanel/customer-panel";
+import Sellerlayout from "./pages/layout/seller.layout";
 
 const Routings=()=>{
 
@@ -52,7 +53,6 @@ const Routings=()=>{
   //   }
     
   // },[])
-
   useEffect(()=>{
     let token=localStorage.getItem("_au") || null
     if(token){
@@ -60,6 +60,7 @@ const Routings=()=>{
       dispatch(getCartDetail())
     }
   },[])
+ 
   
     return (  
       <>
@@ -114,6 +115,25 @@ const Routings=()=>{
             
             </Route>
            
+              <Route path="/seller" element={<CheckPermission accessBy={"seller"}><Sellerlayout/></CheckPermission>}>
+              <Route index element={<DashboardPage/>}></Route>
+              <Route path="banner" element={<BannerList/>}></Route> 
+              <Route path="banner/create" element={<AddBanner/>}></Route>
+              <Route path="banner/:id" element={<EditBanner/>}></Route>
+
+              <Route path="brand" element={<BrandList/>}></Route>
+              <Route path="brand/create" element={<AddBrand/>}></Route>
+              <Route path="brand/:id" element={<EditBrand/>}></Route>
+
+              <Route path="product" element={<ProductList/>}></Route>
+              <Route path="product/create" element={<AddProduct/>}></Route>
+              <Route path="product/:id" element={<EditProduct/>}></Route>
+
+              <Route path="category" element={<CategoryList/>}></Route>
+              <Route path="category/create" element={<AddCategory/>}></Route>
+              <Route path="category/:id" element={<EditCategory/>}></Route>
+              <Route path="*" element={<Error404 goBackUrl={"/seller"} name={"Seller Page"}/>}/>
+              </Route>
         </Routes>
      </BrowserRouter>
      </>

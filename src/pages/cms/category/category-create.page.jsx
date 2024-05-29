@@ -112,6 +112,7 @@ const AddCategory=()=>{
                                     />
                                 </Col>
                             </Form.Group>
+                            
                             {/* <Form.Group className="row mb-3">
                                 <Form.Label className="col-sm-3">Sub Category:</Form.Label>
                                 <Col sm={9}>

@@ -16,6 +16,7 @@ const EditProduct = () => {
 
     const [productDetail, setProductDetail] = useState();
     const params = useParams();
+   
 
     const productRules = Yup.object({
         title: Yup.string().min(2, "Title should be atlease 2 character long").required("Title is required"),
@@ -34,7 +35,10 @@ const EditProduct = () => {
     const { control, handleSubmit, setError, setValue, formState: { errors } } = useForm({
         resolver: yupResolver(productRules)
     });
+   
+   
 
+  
     const submitForm =  async(data) => {
         try {
 
@@ -73,10 +77,17 @@ const EditProduct = () => {
                 label: (response.result.status === "active" ? "Publish" : "Un-Publish"),
                 value: response.result.status
             })
+            setValue('brand',{
+                    label: response.result.brand.title,
+                    value: response.result.brand._id
+            })  
+
+            setProductDetail(response.result.category)
            
+            console.log(productDetail)
             // setProductDetail(response.result)
             setThumb(import.meta.env.VITE_IMAGE_URL + '/' + response.result.image)
-            setValue('title', response.result.title)
+            
         } catch (exception) {
             console.log(exception)
         }
@@ -197,8 +208,12 @@ const EditProduct = () => {
                                             "label": d.title
 
                                         }))}
+                                         
 
-                                        setValue={setValue}
+                                      setValue={setValue}
+                                       
+                                    
+                                        
                                     />
 
                                 </Col>

@@ -173,7 +173,7 @@ const CartPage = () => {
                                                         }}
                                                     />
                                                 </td>
-                                                <td>{item.productId.title}</td>
+                                                <td>{item?.productId?.title}</td>
                                                 {/* <td>
                                                     <Image fluid sizes="sm" style={{maxWidth:"75px"}} src={import.meta.env.VITE_IMAGE_URL+"/"+item.productId.images[0]}></Image>
                                                 </td> */}

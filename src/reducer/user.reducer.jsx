@@ -15,7 +15,7 @@ export const getLoggedInUser= createAsyncThunk(
         }catch(exception){
             console.log("I am error in redux thunk")
             throw exception;
-        }
+        }   
     }
 )
 

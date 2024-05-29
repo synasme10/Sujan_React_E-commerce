@@ -1,4 +1,4 @@
-import { Badge, Card, CardBody, CardFooter, Col, Container, Pagination, Row, Table } from "react-bootstrap";
+import { Badge, Card, CardBody, CardFooter, Col, Container, Image, Pagination, Row, Table } from "react-bootstrap";
 import AdminBreadCrumb from "../../../component/cms/breadcrumb/breadcrumb.component";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -9,10 +9,14 @@ import TableStatus from "../../../component/cms/table/table-status.component";
 import TableAction from "../../../component/cms/table/table-actions.component";
 import { toast } from "react-toastify";
 import TableImage from "../../../component/cms/table/table-image.component";
+import { isRejectedWithValue } from "@reduxjs/toolkit";
 
 const ProductList = () => {
 
 
+    const [userRole,setUserRole]=useState();
+    const userDetail=JSON.parse(localStorage.getItem('_ud'))
+    
     const [data, setData] = useState();
     const [loading, setLoading] = useState(true);
     let [pageNo,setPageNo]=useState(1);
@@ -23,6 +27,11 @@ const ProductList = () => {
         noOfPages: 1
      
     })
+
+
+    const showError = (e) => {
+        e.target.src = "https://placehold.co/75x50?text=No+Image+Found"
+    }
 
     const getAllProducts = async (config) => {
         try {
@@ -53,6 +62,7 @@ const ProductList = () => {
 
     useEffect(() => {
         getAllProducts({ page: 1, limit: 15, search: null })
+        setUserRole(userDetail.role)
     }, [])
 
 
@@ -83,7 +93,7 @@ const ProductList = () => {
                             },
                             {
                                 title: "Dashboard",
-                                link: "/admin"
+                                link: "/"+{userRole}
                             },
 
                             {
@@ -103,7 +113,7 @@ const ProductList = () => {
                                     </h4>
                                 </Col>
                                 <Col sm={12} md={6}>
-                                    <NavLink className={"btn btn-sm btn-success float-end"} to="/admin/product/create">
+                                    <NavLink className={"btn btn-sm btn-success float-end"} to={"/"+userRole+"/product/create"}>
                                         <i className="fa fa-plus"></i>&nbsp; Add Product
                                     </NavLink>
                                 </Col>
@@ -115,11 +125,13 @@ const ProductList = () => {
                             <thead className="table-dark">
                                 <tr>
                                     <th>S.N.</th>
-                                    <th>Title</th>
-                                    <th>Tagline</th>
+                                    <th style={{width:"35%"}}>Title</th>
+                                    <th>Price</th>
+                                    <th>Discount(In%)</th>
                                     <th>Image</th>
+                                    
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th className="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -139,10 +151,12 @@ const ProductList = () => {
                                                         <tr key={index}>
                                                             <td>{pageNo++}</td>
                                                             <td>{row.title}</td>
-                                                            <td>{row.tagline}</td>
+                                                            <td>{row.price}</td>
+                                                            <td><del className="text-danger">{row.discount}%</del>&nbsp; = {row.afterDiscount}</td>
                                                             <td> 
-                                                                <TableImage image={row.image}/>
-                                                                {/* <img src={`${import.meta.env.VITE_IMAGE_URL}/${row.image}`} alt="" className="img img-fluid product-small"/>   */}
+                                                                
+                                                                <Image  fluid onError={showError} src={`${import.meta.env.VITE_IMAGE_URL}/${row.image}`} />
+                                                                
                                                                 {/* <img src={product1} alt="" className="img img-fluid product-small" />
                                                                 {row.image} */}
                                                             </td>
@@ -154,7 +168,7 @@ const ProductList = () => {
                                                                 <TableAction
                                                                     deleteAction={deleteData}
                                                                     id={row._id}
-                                                                    editUrl={"/admin/product/"+row._id}
+                                                                    editUrl={"/"+userRole+"/product/"+row._id}
                                                                 />
                                                             </td>
                                                         </tr>

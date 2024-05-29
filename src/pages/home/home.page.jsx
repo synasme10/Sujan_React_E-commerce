@@ -71,7 +71,7 @@ const HomePage =({name}) =>{
           </Row>
           <Row >
             <ProductGridList products={productList}/>
-          </Row>
+          </Row>  
         </Container>
       </>
      
