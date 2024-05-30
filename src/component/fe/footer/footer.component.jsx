@@ -17,7 +17,7 @@ const FeFooter = () => {
         <>
        
         
-            <Container fluid className="bg-body-tertiary" bg={theme} data-bs-theme={theme} >
+            <Container fluid className="bg-body-tertiary mt-4" bg={theme} data-bs-theme={theme} >
                 <Row className="py-5 px-5">
                     <Col className={`text-${theme === 'light' ? 'dark' : 'light'}`} >
                         <div className="mx-5">

@@ -30,9 +30,25 @@ const AddProduct = () => {
     const [category, setCategory] = useState();
     const [thumb, setThumb] = useState();
     const [loading, setLoading] = useState(false);
-    const { control, handleSubmit, setError, setValue, formState: { errors } } = useForm({
+    const { control, handleSubmit, setError,isMultiple, setValue, formState: { errors } } = useForm({
         resolver: yupResolver(productRules)
     });
+
+    var ColourOptions={ "Color":[
+        { value: 'black', label: 'Black'},
+        { value: 'blue', label: 'Blue'},
+        { value: 'white', label: 'White'},
+        { value: 'purple', label: 'Purple' },
+        { value: 'red', label: 'Red'},
+        { value: 'orange', label: 'Orange' },
+        { value: 'yellow', label: 'Yellow' },
+        { value: 'green', label: 'Green'},
+        { value: 'brown', label: 'Brown' },
+        { value: 'pink', label: 'Pink' },
+        { value: 'silver', label: 'Silver' },
+      ]
+  
+    }
 
     const submitForm = async (data) => {
         try {
@@ -42,6 +58,7 @@ const AddProduct = () => {
                 status: data.status.value,
                 category:data.category.value,
                 brand:data.brand.value
+                // attributes:JSON.stringify()
                 // category:data.category.value,
                 // brand:data.brand.value
             }
@@ -239,22 +256,53 @@ const AddProduct = () => {
                                     />
                                 </Col>
                             </Form.Group>
+
+                            {/* <Form.Group className="row mb-3">
+                                <Form.Label className="col-sm-3">Attributes:</Form.Label>
+                                
+                                <Col sm={9}>
+                                   
+                                    <SelectDropDownComponent
+                                        name={'attributes'}
+                                        control={control}
+                                        errMsg={errors?.status?.message}
+                                        options={ColourOptions.Color}
+                                        isMultiple={true}
+                                        setValue={setValue}
+                                    />
+                                </Col>
+                                <Col sm={3}></Col>
+                                <Col sm={9}>
+                                    <SelectDropDownComponent
+                                        name={'attributes'}
+                                        control={control}
+                                        errMsg={errors?.status?.message}
+                                        options={ColourOptions.Color}
+                                        isMultiple={true}
+                                        setValue={setValue}
+                                    />
+                                </Col>
+                               
+                            </Form.Group> */}
                             <Form.Group className="row mb-3">
                                 <Form.Label className="col-sm-3">Image: </Form.Label>
                                 <Col sm={7}>
                                     <ImageUploaderComponent
-                                        name={"image"}
+                                        name={"images"}
                                         control={control}
-                                        errMsg={errors?.image?.message}
+                                        errMsg={errors?.images?.message}
                                         setError={setError}
                                         setValue={setValue}
                                         setThumb={setThumb}
+                                        isMultiple={true}
+                                       
                                     />
 
                                 </Col>
                                 <Col sm={2}>
                                     <Image fluid alt="thumbnail"
-                                        src={thumb ? URL.createObjectURL(thumb) : 'https://placehold.co/600x200/dddddd/000000?text=Hello+World'} />
+                                        src={thumb ? 
+                                        (typeof thumb==='object')?URL.createObjectURL(thumb):thumb : 'https://placehold.co/600x200/dddddd/000000?text=Hello+World'} />
                                 </Col>
                             </Form.Group>
                             <Form.Group className="row mb-3">

@@ -41,7 +41,7 @@ const ProductDetailpage = () => {
         productDetailBySlug()
     }, [params]);
 
-    console.log(detail)
+    
 
     const showError = (e) => {
         e.target.src = "https://placehold.co/300x250?text=No+Image+Found"
@@ -89,18 +89,18 @@ const ProductDetailpage = () => {
                                 </Carousel>
                             </Col>
                             <Col sm={12} md={6}>
-                                <h4 className="mb-3">{detail.title}</h4>
+                                <h4 className="mb-3">{detail?.title}</h4>
                                 <Row className="mb-3">
-                                    <Col sm={2}>
+                                    <Col sm={3}>
                                         <strong>Brand:</strong>
                                     </Col>
-                                    <Col sm={10}>{detail.brand.title ?? "No Brand"}</Col>
+                                    <Col sm={9}>{detail?.brand?.title ?? "No Brand"}</Col>
                                 </Row>
                                 <Row>
-                                    <Col sm={2}>
+                                    <Col sm={3}>
                                         <strong>Category:</strong>
                                     </Col>
-                                    <Col sm={10}>
+                                    <Col sm={9} className="mb-3">
                                         {
                                             detail.category && detail.category.map((cat, index) => (
                                                 <Badge key={index} bg="info">
@@ -111,10 +111,10 @@ const ProductDetailpage = () => {
                                     </Col>
                                 </Row>
                                 <Row className="mb-3">
-                                    <Col sm={2}>
+                                    <Col sm={3}>
                                         <strong>Price:</strong>
                                     </Col>
-                                    <Col sm={10}>
+                                    <Col sm={9}>
                                         <strong className="me-3"> Rs. {detail.afterDiscount}</strong>
                                         {
                                             detail.discount > 0 ? <>
@@ -126,23 +126,22 @@ const ProductDetailpage = () => {
                                 </Row>
 
                                 <Row className="mb-3">
-                                    <Col sm={2}>
-                                        <strong>Attributes:</strong>
-                                    </Col>
-                                    <Col sm={10}>
-
-                                        {
+                                   
+                                    <Col sm={12} className="mb-2">
+                                       
+                                        { 
                                             detail.attributes && detail.attributes.map((attr, ind) => (
-                                                <Row className="mb-2" key={ind}>
-                                                    <Col sm={4}>
-                                                        {attr.name}:
+                                                <Row className="mb-3" key={ind}>
+                                                   
+                                                    <Col sm={3}>
+                                                        <strong>{attr.name}:</strong>
                                                     </Col>
-                                                    <Col sm={8}>
+                                                    <Col sm={9}>
                                                         {
                                                             attr.value && attr.value.map((val, ind) => (
-                                                                <strong key={ind}>
+                                                                <span key={ind}>
                                                                     {val}&nbsp;
-                                                                </strong>
+                                                                </span>
                                                             ))
                                                         }
                                                     </Col>
@@ -154,7 +153,7 @@ const ProductDetailpage = () => {
 
                                     </Col>
                                     <Row className="mb-3">
-                                        <Col sm={2}>
+                                        <Col sm={3}>
                                             <Form.Control
                                                 type="number"
                                                 size="sm"
@@ -175,7 +174,7 @@ const ProductDetailpage = () => {
                                             />
                                             <span className="text-danger">{qtyErr}</span>
                                         </Col>
-                                        <Col sm={10}>
+                                        <Col sm={9}>
                                             <Button onClick={addToCart} disabled={qtyErr ? true : false} variant="warning" type="button" size="sm">Add to Cart</Button>
                                         </Col>
                                     </Row>
@@ -185,7 +184,7 @@ const ProductDetailpage = () => {
                         </Row>
                         <Row className="mt-5">
 
-                            <Col sm={12} md={9}><span>Description: </span><strong>{detail.description}</strong></Col>
+                            <Col sm={12} md={9}><strong>Description: </strong><span>{detail.description}</span></Col>
 
                         </Row>
                         <Row className="mt-5">

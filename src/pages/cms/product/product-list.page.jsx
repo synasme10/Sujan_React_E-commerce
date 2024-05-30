@@ -15,7 +15,7 @@ const ProductList = () => {
 
 
     const [userRole,setUserRole]=useState();
-    const userDetail=JSON.parse(localStorage.getItem('_ud'))
+
     
     const [data, setData] = useState();
     const [loading, setLoading] = useState(true);
@@ -61,8 +61,12 @@ const ProductList = () => {
     }
 
     useEffect(() => {
+        const userDetail=JSON.parse(localStorage.getItem('_ud'))
         getAllProducts({ page: 1, limit: 15, search: null })
-        setUserRole(userDetail.role)
+        if(userDetail){
+            setUserRole(userDetail.role)
+        }
+       
     }, [])
 
 

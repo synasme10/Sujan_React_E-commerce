@@ -11268,6 +11268,16 @@ body {
   text-decoration: underline;
 }
 
+.add-link{
+  color:black;
+  text-decoration: none;
+}
+
+.add-link:hover{
+  color: black;
+
+}
+
 .product-title{
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -11275,4 +11285,153 @@ body {
   overflow: hidden;
   height: 40px;
 
+}
+
+.articles {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.images {
+  object-fit: cover;
+  width: 2000px;
+  margin-left: 20px;
+
+}
+
+.headers {
+  font-size: 40px;
+  color: black;
+  text-align: left;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-left: 150px;
+  margin-top: 160px;
+}
+
+.huba-headers {
+  background-position: center;
+  font-size: 40px;
+  color: black;
+  text-align: left;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-left: 200px;
+  margin-top:35px;
+}
+
+.half-articles {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.half-images {
+  object-fit: cover;
+  width: 2000px;
+  margin-left: 20px;
+
+}
+
+.half-headers {
+  font-size: 40px;
+  color: #f0b2bd;
+  text-align: left;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-left: 70px;
+  margin-top: 190px;
+}
+
+.half-headers-right {
+  font-size: 40px;
+
+  text-align: right;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-right: 60px;
+  margin-top: 180px;
+}
+
+.pink-link{
+  color: #f0b2bd;
+  background-color: #f0b2bd; 
+}
+.pink-button{
+  color: #f0b2bd;
+  background-color: #f0b2bd; 
+  border: none;
+  color: white;
+  padding: 7px 20px;
+  border-radius: 25px;
+  font-size: 16px;
+}
+
+.pink-button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  color: #f0b2bd;
+  background-color: #f0b2bd;
+}
+
+
+.pink-button span:after{
+  color: #f0b2bd;
+  background-color: #f0b2bd;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.pink-button:hover{
+
+  color: #f0b2bd;
+  background-color: #f0b2bd;
+}
+.pink-button:hover span{
+  padding-right: 15px;
+  color: #f0b2bd;
+ 
+  background-color: #f0b2bd;
+}
+.pink-button:hover span:after{
+  background-color: #f0b2bd;
+  color: #f0b2bd;
+  opacity: 1;
+  right: 0;
+
+  padding-right: 15px;
+}
+
+.pink-button span{
+  background-color: #f0b2bd;
+  color: #f0b2bd;
+}
+.pink-button span:active{
+  background-color: #f0b2bd;
+  color: #f0b2bd;
+}
+
+.pink-button:active{
+  background-color: #f0b2bd;
+  color: #f0b2bd;
 }

@@ -7,7 +7,7 @@ export const SingleProduct=({product})=>{
         e.target.src = "https://placehold.co/300x250?text=No+Image+Found"
     }
     return(<>
-    <Card className="productlist-design mt-4" style={{width:"270px"}}>
+    <Card className="productlist-design mt-4 ms-4" style={{width:"270px"}}>
                 <Card.Img onError={showError} variant="top" src={import.meta.env.VITE_IMAGE_URL + "/" + product.images[0]} />
                 <Card.Body>
                     <Card.Title as={'h6'} >
@@ -24,14 +24,15 @@ export const SingleProduct=({product})=>{
                     <Card.Text>
                         {
                             product.category && product.category.map((cat, ind) => (
-                                <Badge bg="info" key={ind} className="me-3">
+                                <Badge bg="primary" key={ind} className="me-3">
                                     {
                                         cat.title
                                     }
                                 </Badge>
                             ))
                         }
-
+                        
+                            <NavLink to={"/brand/"+product?.brand?.slug}><Badge>{product?.brand?.title}</Badge></NavLink>
                     </Card.Text>
 
                 </Card.Body>

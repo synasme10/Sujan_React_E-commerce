@@ -152,7 +152,7 @@ export const SelectDropDownComponent = ({ control,isMultiple=false, errMsg, name
     )
 }
 
-export const ImageUploaderComponent = ({ setError, setThumb, setValue, control, name, errMsg }) => {
+export const ImageUploaderComponent = ({ setError,isMultiple=false, setThumb, setValue, control, name, errMsg }) => {
     const imageUploadCOntroller = useController({
         name: name,
         control,
@@ -163,6 +163,7 @@ export const ImageUploaderComponent = ({ setError, setThumb, setValue, control, 
             type='file'
             accept='image/*'
             size="sm"
+            multiple={isMultiple}
             onChange={(e) => {
                 const { files } = e.target;
                 //    console.log(files);

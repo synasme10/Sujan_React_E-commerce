@@ -69,7 +69,7 @@ const EditProduct = () => {
         try {
             const response = await productSvc.getProductById(params.id)
             console.log(response)
-            setValue('title', response.result.title)
+            setValue('title', response?.result?.title)
             setValue('description', response.result.description)
             setValue('price', response.result.price)
             setValue('discount', response.result.discount)
@@ -78,13 +78,16 @@ const EditProduct = () => {
                 value: response.result.status
             })
             setValue('brand',{
-                    label: response.result.brand.title,
+                    label: response.result?.brand?.title,
                     value: response.result.brand._id
-            })  
-
-            setProductDetail(response.result.category)
+            }) 
+          
+        
+            setValue('category',{
+                label:response.result.category[0].title,
+                value: response.result.category[0]._id
+        }) 
            
-            console.log(productDetail)
             // setProductDetail(response.result)
             setThumb(import.meta.env.VITE_IMAGE_URL + '/' + response.result.image)
             
@@ -228,7 +231,7 @@ const EditProduct = () => {
                                         errMsg={errors?.brand?.message}
                                         options={brand && brand.map(b => ({
                                             "value": b._id,
-                                            "label": b.title
+                                            "label": b?.title
 
                                         }))}
                                         setValue={setValue}
@@ -280,12 +283,13 @@ const EditProduct = () => {
                                 <Form.Label className="col-sm-3">Image: </Form.Label>
                                 <Col sm={7}>
                                     <ImageUploaderComponent
-                                        name={"image"}
+                                        name={"images"}
                                         control={control}
-                                        errMsg={errors?.image?.message}
+                                        errMsg={errors?.images?.message}
                                         setError={setError}
                                         setValue={setValue}
                                         setThumb={setThumb}
+                                        isMultiple={true}
                                     />
 
                                 </Col>
