@@ -41,10 +41,9 @@ const AddCategory=()=>{
             const response=await categorySvc.postCategorys(formattedData)
             toast.success(response?.message)
             navigate('/admin/category')
-            // console.log(response)
+       
             
 
-            // console.log(data)
         }catch(exception){
             console.log(exception)
             toast.error("category cannot be created")
@@ -53,12 +52,12 @@ const AddCategory=()=>{
         }
     }
 
-    // console.log({errors}) check errors
+
     return(
         <>
         <div className="container-fluid px-4">
                 <h1 className="mt-4">Add category</h1>
-                {/* {TODO:Dynamic Control} */}
+
                 <AdminBreadCrumb
                     data={
                         [
@@ -112,17 +111,6 @@ const AddCategory=()=>{
                                     />
                                 </Col>
                             </Form.Group>
-                            
-                            {/* <Form.Group className="row mb-3">
-                                <Form.Label className="col-sm-3">Sub Category:</Form.Label>
-                                <Col sm={9}>
-                                    <TextInputComponent
-                                    name={'subCategory'}
-                                    control={control}
-                                    errMsg={errors?.subCategory?.message}
-                                    />
-                                </Col>
-                            </Form.Group> */}
 
                             <Form.Group className="row mb-3">
                                 <Form.Label className="col-sm-3">Status:</Form.Label>

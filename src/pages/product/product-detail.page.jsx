@@ -20,11 +20,11 @@ const ProductDetailpage = () => {
 
     const dispatch=useDispatch();
 
-    //brower refresh  garda data ma change kei ako chiana (slug ma) or state reset reupdate hudaina detail fetch ma bhane previous call memomize garera rakhxa,  
+   
 
     const productDetailBySlug = useCallback(async () => {
         try {
-            // const response=await productSvc.getProductBySlug(params.slug)
+            // const response=await productSvc.getProductBySlug(params.id)
             const response = await productSvc.getProductById(params.id)
             setDetail(response.result)
             // setDetail(response.result.detail)

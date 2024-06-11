@@ -21,7 +21,7 @@ const EditBrand=()=>{
             label:Yup.string().matches(/^(Publish|Un-Publish)$/,"Status should be either Publish or Unpublish"),
             value:Yup.string().matches(/^(active|inactive)$/,"value should be either active or inactive"),
         },"Status should be provided").required("Select Status")
-        // image:Yup.string().required(),
+       
     })
 
     const navigate=useNavigate();
@@ -44,9 +44,7 @@ const EditBrand=()=>{
             const response=await brandSvc.updateBrandsbyID(params.id,formattedData)
             toast.success(response?.message)
             navigate('/admin/brand')
-            // console.log(response)
-
-            // console.log(data)
+           
         }catch(exception){
             console.log(exception)
             toast.error("Brand cannot be created")
@@ -65,7 +63,7 @@ const EditBrand=()=>{
                 label:(response.result.status==="active" ? "Publish": "Un-Publish"),
                 value:response.result.status
             })
-            // setBrandDetail(response.result)
+        
             setThumb(import.meta.env.VITE_IMAGE_URL+'/'+response.result.image)
             setValue('title',response.result.title)
         }catch(exception){
@@ -76,12 +74,12 @@ const EditBrand=()=>{
         getBrandDetail()
     },[params])
 
-    // console.log({errors}) check errors
+    
     return(
         <>
         <div className="container-fluid px-4">
                 <h1 className="mt-4">Edit Brand</h1>
-                {/* {TODO:Dynamic Control} */}
+               
                 <AdminBreadCrumb
                     data={
                         [

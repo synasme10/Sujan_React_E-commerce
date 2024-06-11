@@ -12,7 +12,7 @@ import SellerSideBar from '../seller/sellerpanel/seller-sidebar.component'
 
 const Sellerlayout =()=>{
     let loggedInUser=useSelector((root)=>{
-        // console.log(root)
+
         return root?.User?.user
     })
 

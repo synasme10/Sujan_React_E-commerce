@@ -11,19 +11,14 @@ import { useSelector } from 'react-redux'
 
 
 const Adminlayout =()=>{
-    // const loggedInUser=JSON.parse(localStorage.getItem("_ud")) || null
+  
 
     let loggedInUser=useSelector((root)=>{
-        // console.log(root)
+     
         return root?.User?.user
     })
 
 
- 
-    // let loggedInUser={
-    //     name:"Sujan Maharjan",
-    //     role:"admin"
-    // }
   
     return(
         <>

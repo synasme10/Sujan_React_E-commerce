@@ -8,22 +8,16 @@ export const EmailInputComponent = ({ control, errMsg, name }) => {
         name: name,
         control,
         defaultValue: "",
-        // rules:{
-        //     required:"Email is required",
-        //     pattern:{
-        //         value:/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        //         message:"Input Valid Email Address"
-        //     }
-        // }
+      
     })
     return (<>
         <Form.Control
 
-            // type='email'
+            
             placeholder="Enter Username"
             size="sm"
             {...emailController.field}
-        //  onChange={handlechange}
+       
         />
         <span className="text-danger">{errMsg}</span>
     </>
@@ -36,13 +30,7 @@ export const PasswordInputComponent = ({ control, errMsg, name }) => {
         name: name,
         control,
         defaultValue: "",
-        // rules:{
-        //     required:"Password is required",
-        //     pattern:{
-        //         value:/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
-        //         message:"min 8 letter password, with at least a symbol, upper and lower case letters and a number"
-        //     }
-        // }
+       
     })
     return (
         <>
@@ -52,7 +40,7 @@ export const PasswordInputComponent = ({ control, errMsg, name }) => {
                 placeholder="Enter Password"
                 size="sm"
                 {...passwordController.field}
-            //  onChange={handlechange}
+           
             />
             <span className="text-danger">{errMsg}</span>
         </>
@@ -99,7 +87,7 @@ export const URLInputComponent = ({ control, errMsg, name }) => {
             placeholder={`Enter your ${name}`}
             size="sm"
             {...urlController.field}
-        //  onChange={handlechange}
+       
         />
         <span className="text-danger">{errMsg}</span>
     </>
@@ -121,7 +109,7 @@ export const TextAreaInputComponent = ({ control, errMsg, name }) => {
             rows={5}
             style={{ resize: "none" }}
             {...textAreaController.field}
-        //  onChange={handlechange}
+      
         />
         <span className="text-danger">{errMsg}</span>
     </>
@@ -166,18 +154,16 @@ export const ImageUploaderComponent = ({ setError,isMultiple=false, setThumb, se
             multiple={isMultiple}
             onChange={(e) => {
                 const { files } = e.target;
-                //    console.log(files);
+             
 
                 const allowformat = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp', 'bmp'];
                 const image = files[0]
-                //size, format , image object data format ma hunxa image ko type size sab tesma hunxa
-
-                //image.ext====>["image","ext"].pop()=>"ext"
+              
                 let fileextension = image.name.split(".").pop();
                 if (!allowformat.includes(fileextension.toLowerCase())) {
                     setError(name, { message: "image format not supported" })
                 } else {
-                    //3*kb*bytes normally 3000000 24 chordinxau 10001000 le garxau
+                    
                     if (image.size <= 3000000) {
                         setThumb(image)
                         setValue(name,image)
@@ -187,8 +173,7 @@ export const ImageUploaderComponent = ({ setError,isMultiple=false, setThumb, se
                     }
                 }
 
-                //     console.log(image)
-                //    setThumb(files[0])
+              
             }}
         />
          <span className='text-danger'>{errMsg}</span>

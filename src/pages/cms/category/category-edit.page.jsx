@@ -21,7 +21,7 @@ const EditCategory=()=>{
             label:Yup.string().matches(/^(Publish|Un-Publish)$/,"Status should be either Publish or Unpublish"),
             value:Yup.string().matches(/^(active|inactive)$/,"value should be either active or inactive"),
         },"Status should be provided").required("Select Status")
-        // image:Yup.string().required(),
+     
     })
 
     const navigate=useNavigate();
@@ -44,9 +44,7 @@ const EditCategory=()=>{
             const response=await categorySvc.updateCategorysbyID(params.id,formattedData)
             toast.success(response?.message)
             navigate('/admin/category')
-            // console.log(response)
-
-            // console.log(data)
+         
         }catch(exception){
             console.log(exception)
             toast.error("Category cannot be created")
@@ -76,12 +74,12 @@ const EditCategory=()=>{
         getCategoryDetail()
     },[params])
 
-    // console.log({errors}) check errors
+
     return(
         <>
         <div className="container-fluid px-4">
                 <h1 className="mt-4">Edit Category</h1>
-                {/* {TODO:Dynamic Control} */}
+  
                 <AdminBreadCrumb
                     data={
                         [

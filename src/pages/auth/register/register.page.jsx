@@ -35,21 +35,11 @@ const RegisterPage = () => {
 
     const navigate=useNavigate();
 
-    //state variable create garxu
-    //change event listen garxu
-    //validation
-    //pass
-    //state variable lai populate garxu
-    //fail
-    //error state populate
-    //display gardinxu
-
-    //submit click
-    //form submission trigger    
+    
 
     console.log(errors)
     const submitForm = async(data) => {
-        // e.preventDefault()
+      
         setLoading(true)
         try {
             const formattedData={
@@ -61,8 +51,7 @@ const RegisterPage = () => {
             toast.success("Registration Successfull. Please Check email for activation")
             console.log(data)
             navigate("/")
-            //otp base 
-            //show otp popup
+            
 
         } catch (exception) {
             console.log("Registration failed", exception)
@@ -136,18 +125,7 @@ const RegisterPage = () => {
                                     />
                                 </Col>
                             </Form.Group>
-                            {/* <Form.Group className="row mb-3">
-                                <Form.Label className="col-sm-3">Password: </Form.Label>
-                                <Col sm={9}>
-
-                                    <PasswordInputComponent
-                                        name={"password"}
-                                        control={control}
-                                        errMsg={errors?.password?.message}
-                                    />
-
-                                </Col>
-                            </Form.Group> */}
+                          
 
                             <Form.Group className="row mb-3">
                                 <Form.Label className="col-sm-3">Address: </Form.Label>
@@ -214,7 +192,7 @@ const RegisterPage = () => {
                 <Row>
                 <Col>
                     Or
-                    {/* <NavLink className={"btn btn-sm btn-link"} to={"/login"} >Login</NavLink> */}
+                    
                     <NavLink className={"btn btn-sm btn-link"} >Login</NavLink>
                 </Col>
                 </Row>

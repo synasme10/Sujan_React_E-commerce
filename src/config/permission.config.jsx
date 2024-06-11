@@ -34,25 +34,13 @@ const CheckPermission = ({ accessBy, children }) => {
     }
    
 }
-    //TOD: login check permision
-    //check login gareko chaina 
-    //login
-    //check login role
-    //accesBy===>children
-    //access 403
-    //conditional operator ho jasle loading ko variable check garxa true bhaye loading component hunxa natra children use hunxa
 
- // setTimeout(() => {
-        //     setLoading(false)
-        // }, 3000)
-        //
-        //localstorage ma set chaina bhane null pathaideu   
     useEffect(() => {
        
         const token=localStorage.getItem("_au") || null
         if(token){
             getLoggedInUser();      
-            // console.log("i got token and user detail")
+            
         }
         else{
             navigate('/login')

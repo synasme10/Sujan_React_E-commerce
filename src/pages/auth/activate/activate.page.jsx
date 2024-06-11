@@ -11,9 +11,7 @@ import { PasswordInputComponent } from "../../../component/common/form/input.com
 
 const ActivatePage=()=>{
 
-    //logic: activation
-    //token verification
-    //success  bhayo bhane password entry form password ra confirm password
+
 
     const params=useParams();
     const navigate=useNavigate();
@@ -30,7 +28,7 @@ const ActivatePage=()=>{
     }
     );
 
-    //async why because promise garxa kunai pani api call le teslai handle garna then or catch use or aysnc and await
+   
     const getVerifyToken=async()=>{
         try{
             const response=await authsvc.verifyToken(params.token)
@@ -44,8 +42,7 @@ const ActivatePage=()=>{
         }
     }
 
-    //useeffect hook import where first parameter is callback  and second parameter is dependency
-    //one time execute/render
+  
     useEffect(()=>{
         getVerifyToken()
     },[])

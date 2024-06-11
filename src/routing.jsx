@@ -35,24 +35,13 @@ import CartPage from "./pages/cart/cart-list.page";
 import { getCartDetail } from "./reducer/cart.reducer";
 import CustomerPanel from "./pages/customer/customerpanel/customer-panel";
 import Sellerlayout from "./pages/layout/seller.layout";
+import Resume from "./pages/resume/resume.page";
 
 const Routings=()=>{
 
   const dispatch=useDispatch();
 
-  // const getLoggedInUser=useCallback(async()=>{
-  //   try{
-  //       const detailResponse= await authsvc.getLoggedInUserDetail();
-  //       if (detailResponse.result){
-  //         dispatch(setLoggedInuser(detailResponse.result));
-  //       }
-  //   }
-  //   catch(exception)
-  //   {
-  //     console.log(exception)
-  //   }
-    
-  // },[])
+
   useEffect(()=>{
     let token=localStorage.getItem("_au") || null
     if(token){
@@ -70,6 +59,7 @@ const Routings=()=>{
             <Route path="/" element={<HomePageLayout/>}>
               <Route index element={<HomePage/>}></Route> 
 
+              <Route path="resume" element={<Resume/>}></Route> 
               {/* <Route path="chat"></Route> */}
               <Route path="login" element={<LoginPage/>}></Route> 
               <Route path="register" element={<RegisterPage/>}></Route> 
@@ -82,10 +72,14 @@ const Routings=()=>{
              
               <Route path="product/:id" element={< ProductDetailpage/>}></Route>
               <Route path="about-us" element={<AboutusComponent/>}></Route>     
-              <Route path="/cart" element={<CheckPermission accessBy={"admin"}>
+              {/* <Route path="/cart" element={<CheckPermission accessBy={"admin"}>
                 <CartPage/>
             </CheckPermission>}>
-              </Route> 
+              </Route>  */}
+              <Route path="/cart" element={
+                <CartPage/>
+            }>
+              </Route>
               <Route path="/customer" element={<CustomerPanel/>}></Route>    
               <Route path="*" element={<Error404 goBackUrl={"/"} name={"Home Page"}/>}/>
             </Route>

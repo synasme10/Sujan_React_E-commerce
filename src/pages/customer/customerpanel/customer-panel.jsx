@@ -10,7 +10,7 @@ const CustomerPanel=()=>{
         try{
             const response=await productSvc.getProductForHomePage();
             setProductList(response.result);
-            // console.log(response.result)
+           
         }catch(exception){
             console.log(exception)
         }

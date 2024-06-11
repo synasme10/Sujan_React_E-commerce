@@ -7,13 +7,10 @@ const SellerSideBar=()=>{
     const loggedInUser=JSON.parse(localStorage.getItem("_ud")) ||null;
     const {theme}=useContext(ThemeContext)
 
-    // const theme=localStorage.getItem("_tm")
+ 
     console.log("i am them",{theme})
 
-    // const loggedInUser={
-    //     name:"Sujan Maharjan"
-    // }
-    
+   
     const sidebarItems=[
        {
             name:"",

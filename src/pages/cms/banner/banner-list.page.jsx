@@ -31,10 +31,7 @@ const BannerList = () => {
             console.log()
             setData(bannerresult.result)
             let pageNo= 15;
-            //first 1 => limit 10 
-            //1 dekhi 10 samma
-            //2 =>//11-20
-            //3 =>//21-30
+           
 
             pageNo=((+bannerresult.meta.currentPage-1)*bannerresult.meta.limit)+1;
             setPageNo(pageNo);
@@ -42,7 +39,7 @@ const BannerList = () => {
                 total: bannerresult.meta.total,
                 page: bannerresult.meta.currentPage,
                 limit: bannerresult.meta.limit,
-                //math.ceil if calculation decimal ayo bhane
+               
                 noOfPages: Math.ceil(bannerresult.meta.total/bannerresult.meta.limit)
             })
         } catch (exception) {
@@ -57,7 +54,7 @@ const BannerList = () => {
     }, [])
 
 
-    //eta ko id aunxa from table actions
+
     const deleteData = async (id) => {
         try {
             const response = await bannerSvc.deleteById(id)
@@ -74,7 +71,7 @@ const BannerList = () => {
         <>
             <div className="container-fluid px-4">
                 <h1 className="mt-4">Banner List</h1>
-                {/* {TODO:Dynamic Control} */}
+            
                 <AdminBreadCrumb
                     data={
                         [
@@ -133,7 +130,7 @@ const BannerList = () => {
                                         </tr>
                                     </> : <>
                                         {
-                                            //data array ma cha so data cha ra data ko point gareko lenght should be greater than o
+                                         
                                             data && data.length ? <>
                                                 {
                                                     data.map((row, index) => (

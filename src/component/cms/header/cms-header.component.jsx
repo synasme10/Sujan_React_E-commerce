@@ -3,29 +3,18 @@ import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { ThemeContext } from '../../../config/theme.config'
-
+import { useDispatch } from 'react-redux'
+import { logouts } from '../../../reducer/user.reducer'
 const CmsHeader=()=>{
 
+    const dispatch=useDispatch();
     const navigate=useNavigate();
     const {theme,toggleTheme}=useContext(ThemeContext)
-   
-    // const themechanger=(e)=>{
-    //     e.preventDefault()
-    //     toggleTheme()
-
-    // }
-
-    // const [theme,setTheme]=useState('dark')
-    // const themechanger=(e)=>{
-    //     let value=theme==='dark'?'light':'dark';
-    //     setTheme(value)
-    // }
 
     const sidebarToggle=(e)=>{
         e.preventDefault()
         document.body.classList.toggle('sb-sidenav-toggled')
-        //TODO:
-        //localstorage.setItem('sb|sidebar-toggle',document.body.classList.contains('sb-sidenav-toggled'));
+      
     }
 
     const logout=(e)=>{
@@ -39,8 +28,7 @@ const CmsHeader=()=>{
             confirmButtonText: "Logout"
           }).then((result) => {
             if (result.isConfirmed) {
-                localStorage.removeItem("_au")
-                localStorage.removeItem("_ud")
+                dispatch(logouts())
                 navigate('/login')
             }
           });
@@ -65,9 +53,9 @@ const CmsHeader=()=>{
                 <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fas fa-user fa-fw"></i></a>
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a className="dropdown-item" href="#!">Settings</a></li>
+                        {/* <li><a className="dropdown-item" href="#!">Settings</a></li>
                         <li><a className="dropdown-item" href="#!">Activity Log</a></li>
-                        <li><hr className="dropdown-divider" /></li>
+                        <li><hr className="dropdown-divider" /></li> */}
                         <li><a onClick={logout} className="dropdown-item" href="#!">Logout</a></li>
                     </ul>
                 </li>

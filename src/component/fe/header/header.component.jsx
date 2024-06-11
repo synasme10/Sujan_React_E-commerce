@@ -5,25 +5,24 @@ import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import Swal from 'sweetalert2'
 import authsvc from "../../../pages/auth/auth.service";
 import { ThemeContext } from "../../../config/theme.config";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import cartSvc from "../../../pages/cms/cart/cart.service";
 import logo1 from "../../../assets/images/logo1.png"
 import brandSvc from "../../../pages/cms/brand/brand.service";
 import categorySvc from "../../../pages/cms/category/category.service";
+import {logouts} from '../../../reducer/user.reducer'
 
 const FeHeader = () => {
 
-  // const[loggedInUser,setLoggedInUser]=useState();
+  const dispatch=useDispatch();
+
   const navigate=useNavigate();
   const [brand, setBrand] = useState();
   const [category, setCategory] = useState();
   const [query, setQuery] = useSearchParams();
 
   const { theme, toggleTheme } = useContext(ThemeContext)
-  // const [totalCount,setTotalCount]=useState();
 
-
-  //root is central store data stored in store page
   const loggedInUser = useSelector((root) => {
     return root?.User?.user;
   });
@@ -64,43 +63,6 @@ const getAllCategorys = async (config) => {
     
   },[])
 
-  // const getCartDetail=useCallback(async()=>{
-  //     try{
-  //       const response=await cartSvc.getMyCart()
-  //       setTotalCount(response?.meta?.totalCount)
-  //     }catch(exception){
-  //       console.log(exception)
-  //     }
-  // },[])
-
-  // useEffect(()=>{
-  //   let token=localStorage.getItem("_au")||null;
-  //   if(token){
-  //     getCartDetail()
-  //   }
-  // },[])
-
-  // const loggedInUser = JSON.parse(localStorage.getItem("_ud")) || null;
-  //store data from one component that can be shared with other component- Redux ,alternative of Redux localStorage
-
-
-  //eslai redux le hatayo 
-  // const getLoggedInUser=async()=>{
-  //   try{
-  //     const response=await authsvc.getLoggedInUserDetail()
-  //     // console.log(response)
-  //     setLoggedInUser(response.result)
-
-  //   }catch(exception){
-
-  //   }
-  // }
-
-  // useEffect(()=>{
-  //   if(localStorage.getItem("_au")){
-  //     getLoggedInUser()
-  //   }
-  // },[])
 
   const logout = (e) => {
     e.preventDefault()
@@ -113,15 +75,15 @@ const getAllCategorys = async (config) => {
       confirmButtonText: "Logout"
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.removeItem("_au")
-        localStorage.removeItem("_ud")
+        // localStorage.removeItem("_au")
+        // localStorage.removeItem("_ud")
+        dispatch(logouts())
         navigate('/login')
       }
     });
 
   }
 
-  // console.log(loggedInUser)
   return (
     <Navbar expand={"lg"} className="bg-body-tertiary" bg={theme} data-bs-theme={theme}>
       <Container fluid>
@@ -165,9 +127,7 @@ const getAllCategorys = async (config) => {
                 ))
               }
             </NavDropdown>
-            {/* <Nav.Item>
-        <NavLink className="nav-link" to="#">Disabled</NavLink>
-        </Nav.Item> */}
+          
           </Nav>
           <Form className="d-flex" role="search" onSubmit={(e) => { e.preventDefault() }}>
             <Form.Control
@@ -180,8 +140,7 @@ const getAllCategorys = async (config) => {
                 setQuery({ q: type })
               }}
             />
-            {/* <Button variant="outline-success" type="submit">
-        Search </Button> */ }
+         
           </Form>
 
           <Nav>
@@ -194,8 +153,6 @@ const getAllCategorys = async (config) => {
               </NavLink>
             </Nav.Item>
                 <Nav.Item>
-                  {/* html tag (jsx) bitra javascipt variable {} data dekhauna paryo bhane interpolet garna parxa {} */}
-
                   <NavLink className="nav-link" to={`/` + loggedInUser?.role}>{loggedInUser?.name}</NavLink>
                 </Nav.Item>
                 <Nav.Item>

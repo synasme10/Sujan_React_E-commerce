@@ -54,9 +54,7 @@ const EditProduct = () => {
             const response = await productSvc.updateProductsbyID(params.id, formattedData)
             toast.success(response?.message)
             navigate('/admin/product')
-            // console.log(response)
-
-            // console.log(data)
+          
         } catch (exception) {
             console.log(exception)
             toast.error("Product cannot be created")
@@ -88,7 +86,7 @@ const EditProduct = () => {
                 value: response.result.category[0]._id
         }) 
            
-            // setProductDetail(response.result)
+          
             setThumb(import.meta.env.VITE_IMAGE_URL + '/' + response.result.image)
             
         } catch (exception) {
@@ -128,12 +126,12 @@ const EditProduct = () => {
         }
     }, [params])
 
-    // console.log({errors}) check errors
+
     return (
         <>
             <div className="container-fluid px-4">
                 <h1 className="mt-4">Edit Product</h1>
-                {/* {TODO:Dynamic Control} */}
+           
                 <AdminBreadCrumb
                     data={
                         [

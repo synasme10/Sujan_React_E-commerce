@@ -53,12 +53,12 @@ const AddBanner=()=>{
         }
     }
 
-    // console.log({errors}) check errors
+   
     return(
         <>
         <div className="container-fluid px-4">
                 <h1 className="mt-4">Add Banner</h1>
-                {/* {TODO:Dynamic Control} */}
+                
                 <AdminBreadCrumb
                     data={
                         [

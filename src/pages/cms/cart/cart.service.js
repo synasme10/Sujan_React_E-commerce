@@ -28,11 +28,11 @@ class CartService extends HttpService{
         }
     }
 
-    //ids ko array value linxa
+
     checkoutCart=async(ids)=>{
         try{
             const response=await this.postRequest('/v1/cart/checkout',ids,{auth:true})
-            // console.log(response);
+   
             return response;
         }catch(exception){
             throw exception;
@@ -45,7 +45,7 @@ class CartService extends HttpService{
                 'Authorization': 'key live_secret_key_68791341fdd94846a146f0457ff7b455',
                 'Content-Type': 'application/json',
                 }})
-            // console.log(response);
+      
             return response;
         }catch(exception){
             throw exception;
@@ -54,7 +54,7 @@ class CartService extends HttpService{
 
 }
 
-//object cart service ko banako
+
 const cartSvc=new CartService();
 export default cartSvc;
 

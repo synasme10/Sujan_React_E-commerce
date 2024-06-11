@@ -20,7 +20,7 @@ const AddBrand=()=>{
             label:Yup.string().matches(/^(Publish|Un-Publish)$/,"Status should be either Publish or Unpublish"),
             value:Yup.string().matches(/^(active|inactive)$/,"value should be either active or inactive"),
         },"Status should be provided").required("Select Status")
-        // image:Yup.string().required(),
+        
     })
 
     const navigate=useNavigate();
@@ -41,10 +41,7 @@ const AddBrand=()=>{
             const response=await brandSvc.postBrands(formattedData)
             toast.success(response?.message)
             navigate('/admin/brand')
-            // console.log(response)
             
-
-            // console.log(data)
         }catch(exception){
             console.log(exception)
             toast.error("brand cannot be created")
@@ -53,12 +50,12 @@ const AddBrand=()=>{
         }
     }
 
-    // console.log({errors}) check errors
+  
     return(
         <>
         <div className="container-fluid px-4">
                 <h1 className="mt-4">Add brand</h1>
-                {/* {TODO:Dynamic Control} */}
+               
                 <AdminBreadCrumb
                     data={
                         [

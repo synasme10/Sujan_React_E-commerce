@@ -43,8 +43,7 @@ export const SingleProduct=({product})=>{
     </>)
 }
 const SingleProductItem = ({product}) => {
-   
-    //console.log(product) 
+  
     return (<>
       <Col className="mb-3 me-2">
             <SingleProduct product={product}></SingleProduct>

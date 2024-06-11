@@ -58,18 +58,13 @@ const AddProduct = () => {
                 status: data.status.value,
                 category:data.category.value,
                 brand:data.brand.value
-                // attributes:JSON.stringify()
-                // category:data.category.value,
-                // brand:data.brand.value
+             
             }
             console.log(formattedData)
             const response = await productSvc.postProducts(formattedData)
             toast.success(response?.message)
             navigate('/admin/product')
-            // console.log(response)
-
-
-            // console.log(data)
+      
         } catch (exception) {
             console.log(exception)
             toast.error(exception?.data?.message)
@@ -110,12 +105,12 @@ const AddProduct = () => {
     }, [])
 
 
-    // console.log({errors}) check errors
+
     return (
         <>
             <div className="container-fluid px-4">
                 <h1 className="mt-4">Add product</h1>
-                {/* {TODO:Dynamic Control} */}
+              
                 <AdminBreadCrumb
                     data={
                         [
@@ -257,33 +252,6 @@ const AddProduct = () => {
                                 </Col>
                             </Form.Group>
 
-                            {/* <Form.Group className="row mb-3">
-                                <Form.Label className="col-sm-3">Attributes:</Form.Label>
-                                
-                                <Col sm={9}>
-                                   
-                                    <SelectDropDownComponent
-                                        name={'attributes'}
-                                        control={control}
-                                        errMsg={errors?.status?.message}
-                                        options={ColourOptions.Color}
-                                        isMultiple={true}
-                                        setValue={setValue}
-                                    />
-                                </Col>
-                                <Col sm={3}></Col>
-                                <Col sm={9}>
-                                    <SelectDropDownComponent
-                                        name={'attributes'}
-                                        control={control}
-                                        errMsg={errors?.status?.message}
-                                        options={ColourOptions.Color}
-                                        isMultiple={true}
-                                        setValue={setValue}
-                                    />
-                                </Col>
-                               
-                            </Form.Group> */}
                             <Form.Group className="row mb-3">
                                 <Form.Label className="col-sm-3">Image: </Form.Label>
                                 <Col sm={7}>

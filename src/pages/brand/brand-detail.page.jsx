@@ -6,11 +6,10 @@ import { Container,Row,Col } from "react-bootstrap";
 import ProductGridList from "../../component/common/product/product-grid.component";
 
 const BrandDetailPage=()=>{
-    // params
+ 
     const params=useParams()
     const [products,setProducts]=useState()
-    // const [query,setQuery]=useSearchParams();
-    // console.log(query.get('q'))
+  
 
     const getBrandDetail=useCallback(async()=>{
         const detail=await brandSvc.getBrandDetail(params.slug)

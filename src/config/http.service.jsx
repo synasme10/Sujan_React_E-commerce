@@ -1,11 +1,8 @@
 import axiosInstance from "./axios.config"
 
-//get() , post(), put(), patch (),delete() method 
-//post put patch le form ko throw data line ho 
-//get delete le data url ko through linxa 
-//repo repogitory pattern
+
 class HttpService {
-    //varaibles
+
     #headers;
 
     getHeaders = (config) => {
@@ -47,21 +44,21 @@ class HttpService {
 
         try {
 
-            //axios ko through post request banako url data header are parameters
+         
             this.getHeaders(config)
             const response = await axiosInstance.post(url, data, {
                 headers: {
-                    // "Content-Type":"application/x-www-form-urlencoded"
+                    
                     ...this.#headers
                 }
             })
 
-            // console.log({response})
+        
 
             return response;
         }
 
-        //TODO: cleanup
+      
 
         catch (exception) {
             throw exception

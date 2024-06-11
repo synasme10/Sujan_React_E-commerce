@@ -39,7 +39,10 @@ const FeFooter = () => {
                                 <NavLink className="nav-links" to="/">Home</NavLink>
                             </Nav.Item>
                             <Nav.Item>
-                                <NavLink className="nav-links" to="/">About Us</NavLink>
+                                <NavLink className="nav-links" to="/aboutus">About Us</NavLink>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <NavLink className="nav-links" to="/resume">Resume</NavLink>
                             </Nav.Item>
                         </Nav>
 

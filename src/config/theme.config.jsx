@@ -18,5 +18,5 @@ export const ThemeProviders=({children})=>{
     };
     
     return <ThemeContext.Provider value={{theme,toggleTheme:toggleTheme}}>{children}</ThemeContext.Provider>
-    // return <ThemeContext.Provider value={{theme,setTheme}}>{children}</ThemeContext.Provider>
+    
 }

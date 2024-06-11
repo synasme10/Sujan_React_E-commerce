@@ -5,7 +5,7 @@ class BannerService extends HttpService{
         try{
             let queryString=`page=${page}&limit=${limit}`;
             if(search){
-                //+=concatinate
+              
                 queryString+='&search='+search
             }
             const response=await this.getRequest(

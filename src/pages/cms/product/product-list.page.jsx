@@ -39,10 +39,7 @@ const ProductList = () => {
             console.log()
             setData(productresult.result)
             let pageNo= 15;
-            //first 1 => limit 10 
-            //1 dekhi 10 samma
-            //2 =>//11-20
-            //3 =>//21-30
+          
 
             pageNo=((+productresult.meta.currentPage-1)*productresult.meta.limit)+1;
             setPageNo(pageNo);
@@ -50,7 +47,7 @@ const ProductList = () => {
                 total: productresult.meta.total,
                 page: productresult.meta.currentPage,
                 limit: productresult.meta.limit,
-                //math.ceil if calculation decimal ayo bhane
+               
                 noOfPages: Math.ceil(productresult.meta.total/productresult.meta.limit)
             })
         } catch (exception) {
@@ -70,7 +67,7 @@ const ProductList = () => {
     }, [])
 
 
-    //eta ko id aunxa from table actions
+  
     const deleteData = async (id) => {
         try {
             const response = await productSvc.deleteById(id)
@@ -87,7 +84,7 @@ const ProductList = () => {
         <>
             <div className="container-fluid px-4">
                 <h1 className="mt-4">Product List</h1>
-                {/* {TODO:Dynamic Control} */}
+          
                 <AdminBreadCrumb
                     data={
                         [
@@ -148,7 +145,7 @@ const ProductList = () => {
                                         </tr>
                                     </> : <>
                                         {
-                                            //data array ma cha so data cha ra data ko point gareko lenght should be greater than o
+                                           
                                             data && data.length ? <>
                                                 {
                                                     data.map((row, index) => (
@@ -216,7 +213,7 @@ const ProductList = () => {
                                     {
                                         pagination.page !== pagination.noOfPages ? <>
                                             <Pagination.Next onClick={(e)=>{
-                                                //+ kina gareko bhanda kaile kai string set bhairako hunxa tesaile
+                                              
                                                  getAllProducts({ page: (+pagination.page+1), limit: pagination.limit, search: null })
                                             }} />
                                             <Pagination.Last onClick={(e)=>{

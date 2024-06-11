@@ -109,6 +109,6 @@ class AuthService extends HttpService{
     }
 
 }
-//authservice ko object
+
 const authsvc=new AuthService();
 export default authsvc;

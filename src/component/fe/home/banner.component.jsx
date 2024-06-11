@@ -30,43 +30,44 @@ const BannerComponent =()=>{
     return (
         <>
         
-        <Container fluid>
+        
             <Row>
                 <Col sm={12} md={12}>
-              
-      {/* <CarouselItem>
-        <img src={banner1} className='d-block w-100' alt='...' />
-      </CarouselItem>
-      <CarouselItem>
-        <img src={banner2} className='d-block w-100' alt='...' />
-      </CarouselItem>
-      <CarouselItem>
-        <img src={banner3} className='d-block w-100' alt='...' />
-      </CarouselItem> */}
-      
-           {
-              bannerData?<>
-                <Carousel  >
-            
-                {
-                bannerData.map((banner,ind)=>(
-                  <CarouselItem key={ind}>
-                    <a target="_banner" href={banner.url}> 
-                  {/* <img onError={showPlaceholder} src={import.meta.env.VITE_IMAGE_URL+'/'+banner.image} className='d-block w-100' alt='...' /> */}
+             <Carousel>
+                <CarouselItem>
                   <img onError={showPlaceholder} src={banner1} className='d-block w-100' alt='...' />
-                  </a>
                 </CarouselItem>
-                ))
-              }
-              </Carousel>
-              </>:<></>
+                <CarouselItem>
+                  <img onError={showPlaceholder} src={banner2} className='d-block w-100' alt='...' />
+                </CarouselItem>
+                <CarouselItem>
+                  <img onError={showPlaceholder} src={banner3} className='d-block w-100' alt='...' />
+                </CarouselItem>
+                </Carousel>
+
+           {
+              // bannerData?<>
+              //   <Carousel  >
+            
+              //   {
+              //   bannerData.map((banner,ind)=>(
+              //     <CarouselItem key={ind}>
+              //       <a target="_banner" href={banner.url}> 
+              //     {/* <img onError={showPlaceholder} src={import.meta.env.VITE_IMAGE_URL+'/'+banner.image} className='d-block w-100' alt='...' /> */}
+              //     <img onError={showPlaceholder} src={banner1} className='d-block w-100' alt='...' />
+              //     </a>
+              //   </CarouselItem>
+              //   ))
+              // }
+              // </Carousel>
+              // </>:<></>
            }
      
     
                 </Col>
             </Row>
 
-        </Container>
+        
         
         </>
     )

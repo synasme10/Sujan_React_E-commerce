@@ -41,7 +41,7 @@ const UserList = () => {
         <>
             <div className="container-fluid px-4">
                 <h1 className="mt-4">User List</h1>
-                {/* {TODO:Dynamic Control} */}
+              
                 <AdminBreadCrumb
                     data={
                         [
@@ -100,7 +100,7 @@ const UserList = () => {
                                         </tr>
                                     </> : <>
                                         {
-                                            //data array ma cha so data cha ra data ko point gareko lenght should be greater than o
+                                            
                                             data && data.length ? <>
                                                 {
                                                     data.map((row, index) => (
